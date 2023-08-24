@@ -38,6 +38,7 @@
             gap: 5px;
             background-color: $light-grey;
             border-radius: 5px;
+            margin-bottom: 5px;
             span {
                 font-size: 10px;
             }
@@ -46,6 +47,28 @@
     // .payment-method::-webkit-scrollbar {
     //     display: none;
     // }
+
+    ::-webkit-scrollbar {
+        height: 5px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+        
+      }
+       
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: $main-yellow; 
+        border-radius: 10px;
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgb(255, 224, 49, 0.7); 
+      }
     .order-items {
         margin: 2rem 0;
         display: flex;
@@ -71,6 +94,9 @@
                     background-color: $light-grey;
                     border-radius: 15px;
                     font-size: 10px;
+                    p {
+                        cursor: pointer;
+                    }
                 }
                 
             }
@@ -87,7 +113,24 @@
             border-radius: 10px;
             padding: 15px;
             width: 100%;
-            color: $light-grey;
+        }
+    }
+}
+
+@media (min-width: 600px) {
+    .main-order {
+        flex-direction: row;
+        justify-content: space-evenly;
+        .order-details {
+            max-width: 60%;
+            .order-direction {
+                margin-top: 5rem;
+            }
+            
+        }
+        .order-finish {
+            min-width: 30%;
+            margin-top: 8rem;
         }
     }
 }
