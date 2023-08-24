@@ -1,0 +1,8 @@
+@import "../../assets/styles/variables.scss";
+
+.bar {
+    display: flex;
+    align-items: center;
+    gap: 35%;
+    font-family: $font-roboto;
+}
