@@ -1,0 +1,47 @@
+@import "../../assets/styles/variables.scss";
+
+.main-adresses {
+    font-family: $font-roboto;
+    font-size: 14px;
+    padding: 2rem 1rem;
+    color: $dark-grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    max-height: fit-content;
+    .adresses {
+        margin-top: 2rem;
+        .adress {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            p {
+                font-size: 10px;
+                color: $grey;
+                padding-left: 15px;
+            }
+            .location {
+                display: flex;
+                gap: 5px;
+                span {
+                    padding: 5px 0;
+                    border-bottom: 1px solid $dark-grey;
+                    width: 80vw;
+                }
+            }
+            .delete {
+                background-color: $main-yellow;
+                border-radius: 5px;
+                padding: 10px;
+                display: none;
+                margin-left: -20px;
+            }
+            
+        }
+        .adress:hover .delete {
+                display: inline-block;
+                cursor: pointer;
+            }
+    }
+}
