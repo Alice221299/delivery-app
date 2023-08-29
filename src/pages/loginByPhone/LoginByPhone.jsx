@@ -1,14 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import logo from '../../assets/Logo.png'
-import './login.scss';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { auth, signInWithEmailAndPassword } from '../../firebase';
+import { auth, signInWithEmailAndPassword } from '../../router/firebase';
 import { useDispatch } from 'react-redux';
 import { setIsAuthenticated } from '../../redux/taskSlice';
 
-const Login = () => {
+const LoginByPhone = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
@@ -90,4 +89,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default LoginByPhone;
