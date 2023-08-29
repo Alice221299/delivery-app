@@ -1,0 +1,37 @@
+@import "../../assets/styles/variables.scss";
+
+.main-card {
+    font-family: $font-roboto;
+    font-size: 14px;
+    padding: 2rem 1rem;
+    color: $dark-grey;
+    .card-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 80vh;
+        max-height: fit-content;
+        margin-top: 2rem;
+        input {
+            background-color: $light-grey;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            color: $grey;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .card-details {
+            display: flex;
+            gap: 15px;
+        }
+        .card-number {
+            position: relative;
+            img {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+            }
+        }
+    }
+}
