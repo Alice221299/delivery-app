@@ -57,4 +57,4 @@ const OrderData = () => {
     )
 }
 
-export default OrderData
+export default OrderData;

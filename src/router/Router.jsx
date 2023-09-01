@@ -9,6 +9,11 @@ import CurrentOrder from '../pages/currentOrder/CurrentOrder'
 import OrderAccepted from '../pages/orderAccepted/OrderAccepted'
 import Payment from '../pages/payment/Payment'
 import NewCard from '../pages/newCard/NewCard'
+import EditProfile from '../pages/editProfile/EditProfile'
+import Profile from '../pages/profile/Profile'
+import OrderData from '../pages/orderData/OrderData'
+import OrdersHistory from '../pages/ordersHistory/OrdersHistory'
+import Search from '../pages/search/Search'
 
 const Router = () => {
 
