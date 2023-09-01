@@ -7,7 +7,7 @@ import eye from "/icons/eye.svg"
 const NewCard = () => {
   return (
     <main className='main-card'>
-        <Bar text="Add new card"/>
+        <Bar text="Add new card" location='payment'/>
         <form className='card-form'>
             <div>
             <input type="text" placeholder='Card name'/>
