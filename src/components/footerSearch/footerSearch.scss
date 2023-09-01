@@ -1,0 +1,35 @@
+
+
+.footerSearch 
+{
+    width: 100vw;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+    align-content: center;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .searched
+    {
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        .point
+        {
+            margin-left: 9px;
+            margin-top: 3.5px;
+        }
+        .pointUser, .pointHome
+        {
+            margin-left: 13px;
+            margin-top: 3.5px;
+        }
+
+
+    }
+}

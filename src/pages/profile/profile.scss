@@ -1,0 +1,214 @@
+
+@mixin border-outline-none {
+    border: none;
+    outline: none;
+}
+
+.user {
+    svg
+    {
+        cursor: pointer;
+
+    }
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-bottom: 32px;
+
+        .backToProfile {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            margin-bottom: 24px;
+
+            .profileEditMain {
+                position: absolute;
+                left: 5%;
+            }
+
+            span {
+                color: var(--Dark-color, #414141);
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+
+        .figureUser {
+            position: relative;
+            align-self: center;
+            width: 64px;
+
+            .imgUser {
+                width: 64px;
+                height: 64px;
+                border-radius: 64px;
+                flex-shrink: 0;
+            }
+
+            .camera {
+                position: absolute;
+                left: 69%;
+                top: 70.5%;
+            }
+
+        }
+
+        .nameUser {
+            color: var(--Dark-color, #414141);
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+
+    }
+
+    .listOptions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px;
+
+        &__action {
+            align-self: center;
+            width: 90%;
+            height: 44px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: var(--complementary-color-light-gray, #F2F2F2);
+            display: flex;
+            justify-content: space-between;
+            padding-left: 3vw;
+            padding-right: 3vw;
+            align-items: center;
+
+            svg
+            {
+                cursor: pointer;
+
+            }
+
+            &.inputEdit {
+                animation: grow-shrink 2s infinite;
+
+                @keyframes grow-shrink {
+
+                    
+                    from {
+                        
+
+                    }
+
+                    
+                    50% {
+                        
+                        width: 92vw;
+
+                    }
+
+                    
+                    to {
+                        
+                        width: 90vw;
+
+                    }
+                }
+
+                
+                input[type=text] {
+                    transition: width 1s, height 1s;
+                }
+            }
+
+            input {
+
+
+                @include border-outline-none;
+                background: none;
+                margin-right: 10px;
+                max-width: 450px;
+                flex: 1;
+                height: 20px;
+                color: var(--Dark-color, #414141);
+                font-family: 'Roboto', sans-serif;
+                font-weight: bold;
+                font-size: 14px;
+                font-style: normal;
+                color: rgb(222, 90, 90);
+
+
+
+
+
+            }
+
+            span {
+                color: var(--Dark-color, #414141);
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                font-weight: bold;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            .countUser {
+                display: flex;
+                gap: 10px;
+            }
+
+            .LanguageEdit {
+                color: var(--Gray-color, #A7A7A7);
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: normal;
+            }
+        }
+    }
+
+
+    .saveContainer {
+        width: 90vw;
+        height: 44px;
+        align-self: center;
+        position: fixed;
+        bottom: 0;
+        margin-bottom: 60px;
+        height: 44px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: var(--Main-color, #FFE031);
+        display: flex;
+        justify-content: center;
+
+        cursor: pointer;
+
+        &:hover
+        {
+            width: 93vw;
+            height: 50px;
+        }
+        span {
+            align-self: center;
+        }
+
+    }
+}
+
+

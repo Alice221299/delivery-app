@@ -28,6 +28,12 @@ const Router = () => {
                     <Route path='accepted' element={<OrderAccepted/>}/>
                     <Route path='payment' element={<Payment/>}/>
                     <Route path='new-card' element={<NewCard/>}/>
+                    <Route path='/Search' element={<Search/>}/>
+                    <Route path='/AllOrders' element={<OrdersHistory/>}/>
+                    <Route path='/OrderData' element={<OrderData/>}/>
+                    <Route path='/Profile' element={<Profile/>}/>
+                    <Route path='/EditProfile' element={<EditProfile/>}/>
+
                 </Route>
             </Route>
         </Routes>
