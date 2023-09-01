@@ -1,0 +1,90 @@
+@import "../../assets/styles/variables.scss";
+
+.main-current {
+    font-family: $font-roboto;
+    font-size: 14px;
+    padding: 2rem 1rem;
+    color: $dark-grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    max-height: fit-content;
+    .current-waiting {
+        background-color: rgb(255, 224, 49, 0.1);
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        .waiting-steps {
+            display: flex;
+            justify-content: space-evenly;
+            font-size: 10px;
+            width: 100%;
+            .step {
+                text-align: center;
+                span {
+                    background-color: $grey;
+                    padding: 0 2px;
+                    border-radius: 50%;
+                    height: fit-content;
+                    margin-bottom: 5px;
+                    display: inline-block;
+                    img {
+                        opacity: 0;
+                    }
+                }
+            }
+            .completed {
+                span {
+                    background-color: $main-yellow;
+                    img {
+                        opacity: 1;
+                    }
+                }
+            }
+            .in-progress {
+                span {
+                    background-color: $main-yellow;
+                    p {
+                        color: $main-yellow;
+                    }
+                }
+            }
+        }
+    }
+    .order-items {
+        margin: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .item-info {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                img {
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 10px;
+                }
+                .item-amount {
+                    color: $grey;
+                    font-size: 10px;
+                    display: flex;
+                }
+            }
+            .item-price {
+                color: $grey;
+                display: flex;
+                gap: 5px;
+            }
+        }
+    }
+}

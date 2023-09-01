@@ -1,0 +1,84 @@
+
+
+.oneOrder 
+{
+
+
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+
+    .detailOrder
+    {
+        display: flex;
+        gap: 21px;
+
+        &__figure 
+        {
+
+            width: 38px;
+            .orderImg
+            {
+                width: 38px;
+                height: 42px;
+            }
+
+        }
+
+        .restaurant
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            &__name 
+            {
+                color: var(--Dark-color, #414141);
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                letter-spacing: -0.3px;
+            }
+            
+            &__price
+            {
+                color: var(--Gray-color, #A7A7A7);
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                letter-spacing: -0.3px;
+            }
+
+        }
+    }
+
+
+    .statuOrders 
+    {
+        display: flex;
+        gap: 9px;
+        .statuOrder
+        {
+            color: #77DF52;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: -0.3px;
+        }
+
+        .arrowOrder 
+        {
+            margin-top: 3px;
+        }
+
+    }
+}

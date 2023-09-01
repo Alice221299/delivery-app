@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Barlow+Condensed:wght@200&family=Barlow:wght@100&family=Bellefair&family=Roboto:wght@100&display=swap');
+
+
+.searchMain
+{
+
+
+    .result
+    {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-left: 5vw;
+        @media screen and (min-width: 570px) 
+        {
+            margin-left: 20vw;    
+        }
+    }
+
+    .recentSearches 
+    {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-left: 5vw;
+        @media screen and (min-width: 570px) 
+        {
+            margin-left: 20vw;    
+        }
+
+        .titleRecent 
+        {
+            color: var(--Dark-color, #414141);
+            
+            font-family: 'Roboto';            
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: -0.3px;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+.dataOrdersDetail {
+    display: flex;
+    flex-direction: column;
+  
+    .backDataOrder {
+      margin-left: 16px;
+      display: flex;
+      gap: 30vw;
+  
+      .backAllOrders {
+        align-self: flex-end;
+      }
+    }
+  
+    .ordersAll__order {
+      &.infoOrderData {
+        margin-bottom: 32px;
+      }
+    }
+  
+    .dataPayment {
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 30vw;
+      justify-content: space-between;
+  
+
+  
+      b {
+        color: var(--Dark-color, #414141);
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: -0.3px;
+      }
+  
+      span {
+        color: var(--Dark-color, #414141);
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: -0.3px;
+      }
+    }
+  
+    .lineSplit {
+      width: 90vw;
+      height: 1px;
+      background: #a7a7a7;
+      margin-bottom: 9px;
+      align-items: center;
+      text-align: center;
+      align-self: center;
+    }
+  }
+  
