@@ -1,0 +1,34 @@
+
+
+.ordersAll 
+{
+
+    display: flex;
+    flex-direction: column;
+    &__name 
+    {
+        margin-top: 16px;
+        align-self: center;
+        color: var(--Dark-color, #414141);
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.3px;
+        align-items: center;
+        align-content: center;
+        align-content: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__order
+    {
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: 34px;
+    }
+
+}
