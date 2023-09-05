@@ -1,0 +1,15 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/reset.scss";
+
+.slash{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $main-yellow;
+    &__img{
+        display: flex;
+        justify-content: center;
+        align-self: center;
+    }
+}

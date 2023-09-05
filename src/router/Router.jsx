@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PublicRouter from './PublicRouter'
 import PrivateRouter from './PrivateRouter'
-import Login from '../pages/login/Login'
 import ManageAdresses from '../pages/manageAdresses/ManageAdresses'
 import Order from '../pages/order/Order'
 import CurrentOrder from '../pages/currentOrder/CurrentOrder'
@@ -16,7 +15,8 @@ import Product from '../pages/product/Product'
 import Verification from '../pages/verification/Verification'
 import Splash from '../pages/splash/Splash'
 import Footer from '../pages/footer/Footer'
-import LoginByPhone from '../pages/loginByPhone/LoginByPhone'
+import Login from '../pages/login/Login'
+
 
 const Router = () => {
 
@@ -24,14 +24,18 @@ const Router = () => {
   return (
     <BrowserRouter>
         <Routes>
-                <Route path="/" element={<LoginByPhone />} />
+
+        
+        <Route path="/" element={<Login />} />
+{/*                 
+
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<CreateAccount />} />
                 <Route path="/restaurant" element={<Restaurant />} />
                 <Route path="/product" element={<Product />} />
                 <Route path="/splash" element={<Splash />} />
-                <Route path="/footer" element={<Footer />} />
+                <Route path="/footer" element={<Footer />} /> */}
 
             {/* <Route path='/'>
                 <Route element={<PublicRouter isAutenticated={isAutenticated}/>}>

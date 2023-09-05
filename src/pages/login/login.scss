@@ -1,33 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/reset.scss";
 
 .login {
-  font-family: 'Roboto';
-  color: #414141;
-  margin: 40px;
-  gap: 20rem;
-
-  &__title {
-    font-weight: 700;
-    font-size: 20px;
+  height: 100vh; 
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto";
+  color: $dark-grey;
+  padding: 30px 20px;
+  gap: 1px;
+  align-items: center;
+  justify-content: space-between;
+  &__header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
   }
-
-  &__text {
-    font-size: 14px;
+  &__form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-
-  &__textDown {
-    font-size: 10px;
-  }
-
   &__button {
-    font-family: 'Roboto';
-    width: 100%;
+    background-color: $main-yellow;
+    font-family: "Roboto";
+    width: 80%;
     font-size: 14px;
     font-weight: 700;
     border-radius: 5px;
+    cursor: pointer;
+    color: $dark-grey;
+  }
+  &__input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid $main-yellow;
+    padding: 0;
+    font-family: 'Roboto';
+    font-size: 12px;
+    width: 100%;
+  }
+  &__label{
+    color: $dark-grey;
   }
 
-
 }
-
-

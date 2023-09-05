@@ -4,57 +4,60 @@ import logo from '../../assets/Logo.png'
 import './login.scss';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { auth, signInWithEmailAndPassword } from '../../firebase';
 import { useDispatch } from 'react-redux';
-import { setIsAuthenticated } from '../../redux/taskSlice';
+import { login } from '../../redux/authActions';
+import google from '../../assets/google.svg'
+// import { setIsAuthenticated } from '../../redux/taskSlice';
+// import { useAuth } from '../../context/authContext';
+
+
 
 const Login = () => {
-
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  // const { signIn, signInWithGoogle } = useAuth();
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
+    const authResult = await signIn(email, password);
+
+    if (authResult) {
       dispatch(setIsAuthenticated(true));
       navigate('/home');
-      localStorage.setItem('isAuthenticated', true); //
-    console.log('User logged in successfully');
-    Swal.fire({
-      text: 'Welcome!',
-      confirmButtonColor: '#FFE031',
-    });
-  } catch (error) {
-    console.error('Error logging in:', error);
-    Swal.fire({
-      text: 'The data does not match',
-      confirmButtonColor: '#FFE031',
-    });
-  }
-};
+      localStorage.setItem('isAuthenticated', true);
+      Swal.fire({
+        text: 'Welcome!',
+        confirmButtonColor: '#FFE031',
+      });
+    } else {
+      Swal.fire({
+        text: 'Email and password do not match',
+        confirmButtonColor: '#FFE031',
+      });
+    }
+  };
 
-  const goRegister = () => {
-    navigate('./register')
-  }
+  const loginWithGoogle = () => {
+    dispatch(login());
+  };
+
+    const goRegister = () => {
+      navigate('./register');
+    }
+
 
   return (
-
-    <div className="login flex flex-col">
-
-      <div className='login__divUp flex flex-col gap-4'>
-        <div className="flex flex-col justify-center items-center text-center gap-4" >
+      <div className='login'>
+        <div className='login__header'>
           <img src={logo} alt="" />
-          <h1 className='login__title'>Sign in</h1>
-          <p className='login__text w-60'>Login or create an account with your phone number to start ordering</p>
+          <h1>Sign in</h1>
+          <p  >Login or create an account with your phone number to start ordering</p>
         </div>
 
         <form className='login__form' onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex flex-col gap-6'>
-            <div className='flex flex-col'>
-              <label className='text-gray-400 login__label'>Email</label>
+            <div>
+              <label>Email</label>
               <input
                 type="email"
                 name="email"
@@ -69,8 +72,8 @@ const Login = () => {
               />
               {errors.email && <span className="error" style={{ color: 'red', fontSize: '10px' }}>{errors.email.message}</span>}
             </div>
-            <div className='flex flex-col'>
-              <label className='text-gray-400 login__label'>Password</label>
+            <div >
+              <label className='login__label'>Password</label>
               <input
                 type="password"
                 name="password"
@@ -81,12 +84,11 @@ const Login = () => {
               />
               {errors.password && <span className="error" style={{ color: 'red', fontSize: '10px' }}>{errors.password.message}</span>}
             </div>
-            <button className='login__button bg-yellow-300 p-2 cursor-pointer' type="submit">Login</button>
-          </div>
+            <button className='login__button' type="submit">Login</button>
         </form>
-        <button className='login__signUp bg-yellow-300 p-2 cursor-pointer' onClick={goRegister}>Sign Up</button>
+        <button type='button' className='login__button' onClick={loginWithGoogle}>Sign in with Google<img src={google} alt="google icon" /></button>
+        <button className='login__button' onClick={goRegister}>Sign Up</button>
       </div>
-    </div>
   );
 }
 
