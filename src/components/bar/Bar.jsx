@@ -1,5 +1,5 @@
 import React from 'react'
-import back from "/icons/Back.svg"
+import back from "../../../public/icons/Back.svg"
 import "./bar.scss"
 import { useNavigate } from 'react-router-dom'
 

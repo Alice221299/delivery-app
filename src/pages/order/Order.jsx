@@ -29,6 +29,10 @@ const Order = () => {
         navigate('/adresses')
     }
 
+    const handlePayment = () => {
+        navigate('/new-card')
+    }
+
   return (
     <main className='main-order'>
         <div className='order-details'>
@@ -57,7 +61,7 @@ const Order = () => {
                     <img src={paypal} alt="" />
                     <span>exaple........</span>
                 </div>
-                <div className='method-name'>
+                <div className='method-name' onClick={handlePayment}>
                     <span>Add new method</span>
                 </div>
             </div>
