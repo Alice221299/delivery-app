@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PublicRouter from './PublicRouter'
 import PrivateRouter from './PrivateRouter'
-import Login from '../pages/login/Login'
 import ManageAdresses from '../pages/manageAdresses/ManageAdresses'
 import Order from '../pages/order/Order'
 import CurrentOrder from '../pages/currentOrder/CurrentOrder'
@@ -14,6 +13,15 @@ import Profile from '../pages/profile/Profile'
 import OrderData from '../pages/orderData/OrderData'
 import OrdersHistory from '../pages/ordersHistory/OrdersHistory'
 import Search from '../pages/search/Search'
+import Home from '../pages/homePag/Home'
+import CreateAccount from '../pages/createAccount/CreateAccount'
+import Restaurant from '../pages/restaurant/Restaurant'
+import Product from '../pages/product/Product'
+import Verification from '../pages/verification/Verification'
+import Splash from '../pages/splash/Splash'
+import Footer from '../pages/footer/Footer'
+import Login from '../pages/login/Login'
+
 
 const Router = () => {
 
@@ -21,7 +29,20 @@ const Router = () => {
   return (
     <BrowserRouter>
         <Routes>
-            <Route path='/'>
+
+        
+        <Route path="/" element={<Login />} />
+{/*                 
+
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<CreateAccount />} />
+                <Route path="/restaurant" element={<Restaurant />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/splash" element={<Splash />} />
+                <Route path="/footer" element={<Footer />} /> */}
+
+            {/* <Route path='/'>
                 <Route element={<PublicRouter isAutenticated={isAutenticated}/>}>
                     <Route path='login' element={<Login/>}/>
                 </Route>
@@ -40,7 +61,7 @@ const Router = () => {
                     <Route path='/EditProfile' element={<EditProfile/>}/>
 
                 </Route>
-            </Route>
+            </Route> */}
         </Routes>
     </BrowserRouter>
 )}
