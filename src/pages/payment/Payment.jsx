@@ -43,8 +43,8 @@ const Payment = () => {
             <div className='payment-methods'>
                 <div className='method chosen'>
                     <div className='card-info'>
-                        <img src={getInfoCard(lastNumbersCard)} alt="" />
-                        <p>{cardNumber}</p>
+                        <img src={getInfoCard(lastNumbersCard)} alt="" role='image'/>
+                        <p role='number'>{cardNumber}</p>
                     </div>
                     <img src={eye} alt="Icon for see method" />
                 </div>
