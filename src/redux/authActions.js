@@ -1,4 +1,4 @@
-import { auth } from "../../../firebase/firebaseConfig";
+import { auth } from "../firebaseConfig";
 import { setError, setIsLogged, setUserLogged } from "./authReducer";
 import {
     signOut,

@@ -1,0 +1,25 @@
+@import "../../assets/styles/variables.scss";
+
+button {
+    position: fixed;
+    bottom: 1rem;
+    left: 3%;
+    width: 94%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $main-yellow;
+    // margin: 0 3%;
+    color: $dark-grey;
+    border: none;
+    text-align: center;
+    padding: 15px 0;
+    border-radius: 10px;
+    font-weight: 500;
+    span {
+        background-color: $dark-grey;
+        color: white;
+        padding: 3px;
+        border-radius: 3px;
+    }
+}

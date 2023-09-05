@@ -35,3 +35,15 @@
         }
     }
 }
+
+@media (min-width: 900px) {
+    .main-card {
+        margin: 0 20%;
+        .card-form {
+            margin-top: 4rem;
+            input {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
