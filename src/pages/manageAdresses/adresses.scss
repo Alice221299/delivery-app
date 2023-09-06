@@ -1,6 +1,8 @@
 @import "../../assets/styles/variables.scss";
 
 .main-adresses {
+    max-width: 900px;
+    // align-items: center;
     font-family: $font-roboto;
     font-size: 14px;
     padding: 2rem 1rem;
@@ -43,5 +45,23 @@
                 display: inline-block;
                 cursor: pointer;
             }
+    }
+}
+
+@media (min-width: 600px) {
+    .main-adresses .adresses .adress {
+        margin-top: 1.5rem;
+        p {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (min-width: 900px) {
+    .main-adresses {
+        margin: 0 20%;
+        .adresses .adress .location span {
+            width: 55vw;
+        }
     }
 }

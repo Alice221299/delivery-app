@@ -15,3 +15,15 @@
         margin: 2rem 10%;
     }
 }
+
+@media (min-width: 800px) {
+    .accepted-main {
+        margin: 0 10%;
+    }
+}
+
+@media (min-width: 900px) {
+    .accepted-main {
+        margin: 0 20%;
+    }
+}
