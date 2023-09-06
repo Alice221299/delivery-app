@@ -1,68 +1,158 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import { useAuth } from '../../context/authContext';
 import location from '../../assets/Location.png';
 import arrow from '../../assets/Arrow.png';
-import today from '../../assets/today.png';
-import home from '../../assets/Home.png';
-import search from '../../assets/Search.png';
-import orders from '../../assets/Orders.png';
-import profile from '../../assets/Profile.png';
 import hamburger from '../../assets/hamburger.png';
 import pizza from '../../assets/pizza.png';
-import restaurant1 from '../../assets/restaurant1.png';
-import stars from '../../assets/Stars.png';
 import './home.scss'
+import { useState } from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from 'react-router-dom';
+import Footer from '../footer/Footer';
+import MainButton from '../../components/mainButton/MainButton';
+
 
 const Home = () => {
-  const { user } = useAuth();
-  console.log(user);
 
-  const taskState = useSelector(state => state.tasks);
-  console.log(taskState);
+  const { fetchRestaurants, restaurants, userData, setMainButtonVisible, isMainButtonVisible} = useAuth();
+
+  useEffect(() => {
+    fetchRestaurants();
+  }, []);
+
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const navigate = useNavigate();
+ 
+  const handleRestaurantClick = (restaurantId) => {
+    navigate(`/restaurant/${restaurantId}`);
+  };
+
+  const goCurrent = () => {
+    setMainButtonVisible(true);
+    navigate('/current');
+  };
+
+  useEffect(() => {
+    localStorage.setItem('isMainButtonVisible', isMainButtonVisible.toString());
+  }, [isMainButtonVisible]);
+  
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+console.log("estos son los restaurantes", restaurants);
 
   return (
-    <div className='home flex flex-col gap-5 m-4'>
-      <div className='flex gap-2'>
+    <div className='home'>
+      <div >
         <div><img src={location} alt="" /></div>
         <div>
-          <p className='text-yellow-300 text-[10px] '>DELIVER TO</p>
-          <p className='flex gap-1 text-[14px] font-bold'>882 Well St, New-York <img className='object-contain' src={arrow} alt="" /></p>
+          <p>DELIVER TO</p>
+          <p>{userData && userData.address}<img className='object-contain' src={arrow} alt="" /></p>
         </div>
       </div>
-      <img className=' rounded-md w-[259px] ' src={today} alt="" />
-      <p className='text-[14px]'>Restaurants and cafes</p>
-
-      <div className='flex gap-5'>
-        <button className='bg-yellow-300 py-2 w-[150px] rounded-md text-[10px]'>All</button>
-        <button className='flex items-center justify-center gap-3 bg-gray-100 w-[150px] rounded-md text-[10px] '>
-          <img src={hamburger} alt="Pizza" />
+   
+      <div className="carousel-container">
+        <Slider {...settings} className="carousel mx-auto">
+          {restaurants.map((restaurant, index) => (
+            <div
+              key={index}
+              className='carousel-slide'
+              onClick={() => {
+                handleRestaurantClick(restaurant.id);
+              }}
+            >
+              <img
+                className="carousel-image"
+                src={restaurant.image}
+                alt={restaurant.name}
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
+ 
+      <p>Restaurants and cafes</p>
+      <div>
+        <button
+          className={`py-2 w-[150px] rounded-md text-[10px] ${selectedCategory === 'All' ? 'bg-yellow-300' : 'bg-gray-100'
+            }`}
+          onClick={() => setSelectedCategory('All')}
+        >
+          All
+        </button>
+        <button
+          className={`flex items-center justify-center gap-3 w-[150px] rounded-md text-[10px] ${selectedCategory === 'Fast Food' ? 'bg-yellow-300' : 'bg-gray-100'
+            }`}
+          onClick={() => setSelectedCategory('Fast Food')}
+        >
+          <img src={hamburger} alt="Fast Food" />
           <span>Fast Food</span>
         </button>
-        <button className='flex items-center justify-center gap-3 bg-gray-100 w-[150px] rounded-md text-[10px]'>
+        <button
+          className={`flex items-center justify-center gap-3 w-[150px] rounded-md text-[10px] ${selectedCategory === 'Pizza' ? 'bg-yellow-300' : 'bg-gray-100'
+            }`}
+          onClick={() => setSelectedCategory('Pizza')}
+        >
           <img src={pizza} alt="Pizza" />
           <span>Pizza</span>
         </button>
       </div>
 
-      <div className='flex gap-5 items-center'>
-        <img className='rounded-md' src={restaurant1} alt="" />
+      <div>
+        {restaurants.map((restaurant, index) => {
+          if (
+            selectedCategory === 'All' ||
+            (restaurant.categories && restaurant.categories.includes(selectedCategory))
+          ) {
+            return (
+              <div
+                key={index}
+                
+                onClick={() => handleRestaurantClick(restaurant.id)}
+              >
+                <img src={restaurant.poster} alt={restaurant.name} />
 
-        <div>
-          <p className='text-[14px] font-bold'>Pardes Restaurant</p>
-          <img src={stars} alt="" />
-          <p className='text-[14px]'>Work time 09:30 - 23:00</p>
-          <p className='text-[10px]'>Before you 4$</p>
-        </div>
+                <div>
+                  <p>{restaurant.name}</p>
+                  <div className="star">
+                    {Array.from({ length: 5 }).map((_, starIndex) => {
+                      const starFraction = restaurant.rating - starIndex;
+                      let starClass = "star-icon-empty";
 
+                      if (starFraction >= 0.5) {
+                        starClass = "star-icon-filled";
+                      } else if (starFraction > 0) {
+                        starClass = "star-icon-half-filled";
+                      }
+
+                      return (
+                        <span key={starIndex} className="star-icon">
+                          <FaStar className={starClass} />
+                        </span>
+                      );
+                    })}
+                  </div>
+
+                  <p> Work time: <span>{restaurant.workTime}</span></p>
+                  <p>Before you {restaurant.price}$</p>
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })}
       </div>
+      {isMainButtonVisible && <MainButton onClick={goCurrent} />}
 
-      <div className='flex justify-between fixed bottom-0 left-0 p-4 w-full'>
-        <img className='object-contain' src={home} alt="" />
-        <img className='object-contain' src={search} alt="" />
-        <img className='object-contain' src={orders} alt="" />
-        <img className='object-contain' src={profile} alt="" />
-      </div>
+
+      <Footer />
     </div>
   );
 }

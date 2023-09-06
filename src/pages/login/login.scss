@@ -25,14 +25,21 @@
     gap: 10px;
   }
   &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: $main-yellow;
     font-family: "Roboto";
     width: 80%;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     border-radius: 5px;
     cursor: pointer;
     color: $dark-grey;
+    img{
+      height: 20px;
+      margin: 3px;
+    }
   }
   &__input {
     outline: none;

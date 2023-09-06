@@ -1,4 +1,4 @@
-import { auth } from "../../../firebase/firebaseConfig";
+import { auth } from "../firebaseConfig";
 import { setError, setIsLogged, setUserLogged } from "./authReducer";
 import {
     signOut,
@@ -8,8 +8,8 @@ import {
     updateProfile,
     signInWithEmailAndPassword,
 } from 'firebase/auth';
-import loginFromFirestore from "../../../service/loginFromCollection";
-import { createAnUserInCollection, getUserFromCollection } from "../../../service/getUser";
+import loginFromFirestore from "../sevice/loginFromCollection";
+import { createAnUserInCollection, getUserFromCollection } from "../sevice/getUser";
 
 
 //Crear accion que nos va a permitir iniciar sesión con el código de verificación
