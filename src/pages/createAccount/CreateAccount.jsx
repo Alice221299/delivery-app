@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import uploadFile from '../../sevice/uploadFile';
 import { useDispatch, useSelector } from "react-redux";
+import back from '../../assets/back.png'
 
 const CreateAccount = () => {
   // const navigate = useNavigate();
@@ -30,21 +31,10 @@ const CreateAccount = () => {
   //     console.log('User registered successfully');
   //     console.log(data)
 
-  //     await Swal.fire({
-  //       text: 'You have successfully registered!',
-  //       confirmButtonColor: '#FFE031',
-    
-  //     });
 
-  //     reset();
-  //     navigate('/login');
-  //   } catch (error) {
-  //     console.error('Error registering user:', error);
-  //   }
-  // };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const {error} = useSelector((store)=>store.auth);
 
   const userRegister = async(data) => {
@@ -57,23 +47,27 @@ const CreateAccount = () => {
           }
           console.log(newUser);
           dispatch(createAnUser(newUser));
-          //Swal.fire("Excelente!", "Haz creado tu cuenta!", "success");
       } catch (error) {
-          //Swal.fire("Oops!", "Hubo un error en la creación de tu cuenta", "error");
-      }
-      
+      }  
   }
 
   if (error) {
-      Swal.fire("Oops!", "Hubo un error en la creación de tu cuenta", "error");
+      Swal.fire({
+        text: 'There was an error in creating the account. Please try again',
+        confirmButtonColor: '#FFE031',
+      });
   }
   if (error === false) {
-       Swal.fire("Excelente!", "Haz creado tu cuenta!", "success").then(()=>navigate("/home"));
+       Swal.fire({
+               text: 'You have successfully registered!',
+               confirmButtonColor: '#FFE031',
+             }).then(()=>navigate("/home"));
   }
 
   return (
     <div className='create'>
-      <h2 className='create__title'>Create account</h2>
+      <div className='create__back' ></div>
+      <h2 className='create__title'><img onClick={() => navigate(-1)} src={back} alt="back arrow" /> Create account</h2>
       <form className='create__form' onSubmit={handleSubmit(userRegister)}>
         <div>
         <div className='create__box'>
@@ -140,8 +134,8 @@ const CreateAccount = () => {
               {...register('password', {
                 required: 'Password is required',
                 minLength: {
-                  value: 3,
-                  message: 'Password must be at least 3 characters long',
+                  value: 6,
+                  message: 'Password must be at least 6 characters long',
                 },
               })}
               className="create__input"

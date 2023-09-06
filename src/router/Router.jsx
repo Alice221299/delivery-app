@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PublicRouter from './PublicRouter'
 import PrivateRouter from './PrivateRouter'
@@ -22,11 +22,27 @@ import Splash from '../pages/splash/Splash'
 import Footer from '../pages/footer/Footer'
 import Login from '../pages/login/Login'
 import LoginByEmailAndPassword from '../pages/loginByEmailAndPass/loginByEmailAndPass'
+import { useDispatch, useSelector } from 'react-redux'
+import { onAuthStateChanged } from '@firebase/auth'
+import { auth } from '../firebaseConfig'
 
 
 const Router = () => {
-
-    const isAutenticated = true
+    const dispatch = useDispatch();
+    const { isLogged, userLogged } = useSelector(store => store.auth);
+    useEffect(() => { 
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                console.log(user);
+                if (!userLogged?.id) {
+                    dispatch(getUserActionFromCollection(uid));
+                }
+            } else {
+                console.log("No hay sesión activa");
+            }
+        })
+    }, [dispatch, userLogged]);
   return (
     <BrowserRouter>
         <Routes>
@@ -38,9 +54,7 @@ const Router = () => {
         <Route path="/product" element={<Product />} />
         <Route path="/home" element={<Home />} />
 
-{/*                 
-
-                
+{/*                  
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<CreateAccount />} />
                 <Route path="/restaurant" element={<Restaurant />} />
@@ -49,13 +63,13 @@ const Router = () => {
                 > */}
 
             {/* <Route path='/'>
-                <Route element={<PublicRouter isAutenticated={isAutenticated}/>}>
-                    <Route path='' element={<Splash/>}/>
+                <Route element={<PublicRouter isAutenticated={isLogged}/>}>
+                    <Route path='init' element={<Splash/>}/>
                     <Route path='login' element={<Login/>}/>
                     <Route path='register' element={<CreateAccount/>}/>
                 </Route>
 
-                <Route element={<PrivateRouter isAutenticated={isAutenticated}/>}>
+                <Route element={<PrivateRouter isAutenticated={isLogged}/>}>
                     <Route path='adresses' element={<ManageAdresses/>}/>
                     <Route path='order' element={<Order/>}/>
                     <Route path='current' element={<CurrentOrder/>}/>

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import logo from '../../assets/Logo.png'
 import './login.scss';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, loginWithEmailAndPassword } from '../../redux/authActions';
 import google from '../../assets/google.svg'
@@ -11,32 +11,6 @@ import { useAuth } from '../../context/authContext';
 
 
 const Login = () => {
-//   const { register, handleSubmit, formState: { errors } } = useForm();
-//   const navigate = useNavigate();
-//   const dispatch = useDispatch();
-//   const signIn = (data) => {
-//     dispatch(loginWithEmailAndPassword(data));
-// }
-
-//   const onSubmit = async (data) => {
-//     // const { email, password } = data;
-//     const authResult = await signIn(data);
-
-//     if (authResult) {
-//       dispatch(setIsAuthenticated(true));
-//       navigate('/home');
-//       localStorage.setItem('isAuthenticated', true);
-//       Swal.fire({
-//         text: 'Welcome!',
-//         confirmButtonColor: '#FFE031',
-//       });
-//     } else {
-//       Swal.fire({
-//         text: 'Email and password do not match',
-//         confirmButtonColor: '#FFE031',
-//       });
-//     }
-//   };
 const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors }  } = useForm();
@@ -47,19 +21,22 @@ const navigate = useNavigate();
       dispatch(loginWithEmailAndPassword(data));
     }
     if (error) {
-        Swal.fire("Oops!", "Ha occurrido un error en el inicio de sesión", "error");
+      Swal.fire({
+                 text: 'Email and password do not match',
+                confirmButtonColor: '#FFE031',
+              });
     }
     if (error === false) {
-        Swal.fire("Excelente", "Haz iniciado sesión correctamente", "success").then(()=>navigate("/home"));
+        Swal.fire({
+                   text: `Welcome back!`,
+                   confirmButtonColor: '#FFE031',
+                 }).then(()=>navigate("/home"));
     }
 
   const loginWithGoogle = () => {
     dispatch(login());
   };
 
-    const goRegister = () => {
-      navigate('/register');
-    }
 
 
   return (
@@ -70,7 +47,7 @@ const navigate = useNavigate();
           <p  >Login or create an account with your phone number to start ordering</p>
         </div>
 
-        {/* <form className='login__form' onSubmit={handleSubmit(signIn)}>
+        <form className='login__form' onSubmit={handleSubmit(signIn)}>
             <div>
               <label>Email</label>
               <input
@@ -99,20 +76,11 @@ const navigate = useNavigate();
               />
               {errors.password && <span className="error" style={{ color: 'red', fontSize: '10px' }}>{errors.password.message}</span>}
             </div>
+            <p className='login__link'>Don't have an account? 
+            <br /><Link to={"/register"}>Sign Up</Link></p>
             <button className='login__button' type="submit">Login</button>
-        </form> */}
-        <main>
-            <button type="button" onClick={() => navigate(-1)}>Atras</button>
-            <h1>Inicia sesión con un correo y una contraseña</h1>
-            <form onSubmit={handleSubmit(signIn)}>
-                <input type="text" placeholder="Correo electrónico" {...register("email")} />
-                <input type="password" placeholder="Contraseña" {...register("password")} />
-                <button type="submit">Iniciar Sesión</button>
-            </form>
-            {/* <p>¿No tienes una cuenta creada con email y contraseña? puedes hacer click <Link to={"/register"}>aquí</Link></p> */}
-        </main>
+        </form>
         <button type='button' className='login__button' onClick={loginWithGoogle}>Sign in with Google<img src={google} alt="google icon" /></button>
-        <button className='login__button' onClick={goRegister}>Sign Up</button>
       </div>
   );
 }

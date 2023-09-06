@@ -18,10 +18,6 @@ export function AuthProvider({ children }) {
       console.error('Error creating user:', error);
     }
   }
-
-
-
-
   return (
     <authContext.Provider value={{ signUp }}>
       {children}
