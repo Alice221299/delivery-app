@@ -12,14 +12,19 @@ import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from 'react-router-dom';
 import Footer from '../footer/Footer';
 import MainButton from '../../components/mainButton/MainButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { fillRestaurantsFromCollection } from '../../redux/actions/restaurantsActions';
 
 
 const Home = () => {
 
-  const { fetchRestaurants, restaurants, userData, setMainButtonVisible, isMainButtonVisible} = useAuth();
+  // const { userData, setMainButtonVisible, isMainButtonVisible} = useAuth();
+  const { restaurants } = useSelector(store => store.restaurants);
+  const { userLogged } = useSelector(store => store.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchRestaurants();
+    dispatch(fillRestaurantsFromCollection())
   }, []);
 
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -29,14 +34,14 @@ const Home = () => {
     navigate(`/restaurant/${restaurantId}`);
   };
 
-  const goCurrent = () => {
-    setMainButtonVisible(true);
-    navigate('/current');
-  };
+  // const goCurrent = () => {
+  //   setMainButtonVisible(true);
+  //   navigate('/current');
+  // };
 
-  useEffect(() => {
-    localStorage.setItem('isMainButtonVisible', isMainButtonVisible.toString());
-  }, [isMainButtonVisible]);
+  // useEffect(() => {
+  //   localStorage.setItem('isMainButtonVisible', isMainButtonVisible.toString());
+  // }, [isMainButtonVisible]);
   
 
   const settings = {
@@ -54,7 +59,7 @@ console.log("estos son los restaurantes", restaurants);
         <div><img src={location} alt="" /></div>
         <div>
           <p>DELIVER TO</p>
-          <p>{userData && userData.address}<img className='object-contain' src={arrow} alt="" /></p>
+          <p>{userLogged && userLogged.address}<img className='object-contain' src={arrow} alt="" /></p>
         </div>
       </div>
    
@@ -149,7 +154,7 @@ console.log("estos son los restaurantes", restaurants);
           return null;
         })}
       </div>
-      {isMainButtonVisible && <MainButton onClick={goCurrent} />}
+      {/* {isMainButtonVisible && <MainButton onClick={goCurrent} />} */}
 
 
       <Footer />
