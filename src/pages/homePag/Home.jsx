@@ -14,6 +14,7 @@ import Footer from '../footer/Footer';
 import MainButton from '../../components/mainButton/MainButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { fillRestaurantsFromCollection } from '../../redux/actions/restaurantsActions';
+import { fillProductsFromCollection } from '../../redux/actions/productsActions';
 
 
 const Home = () => {
@@ -21,11 +22,14 @@ const Home = () => {
   // const { userData, setMainButtonVisible, isMainButtonVisible} = useAuth();
   const { restaurants } = useSelector(store => store.restaurants);
   const { userLogged } = useSelector(store => store.auth);
+  const { products } = useSelector(store => store.products);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fillRestaurantsFromCollection())
-  }, []);
+    dispatch(fillProductsFromCollection())
+    
+  }, [products, dispatch]);
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const navigate = useNavigate();
@@ -52,6 +56,7 @@ const Home = () => {
     slidesToScroll: 1,
   };
 console.log("estos son los restaurantes", restaurants);
+console.log(products);
 
   return (
     <div className='home'>
