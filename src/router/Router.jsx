@@ -17,7 +17,6 @@ import Home from '../pages/homePag/Home'
 import CreateAccount from '../pages/createAccount/CreateAccount'
 import Restaurant from '../pages/restaurant/Restaurant'
 import Product from '../pages/product/Product'
-import Verification from '../pages/verification/Verification'
 import Splash from '../pages/splash/Splash'
 import Login from '../pages/login/Login'
 import { useDispatch, useSelector } from 'react-redux'
@@ -46,31 +45,13 @@ const Router = () => {
   return (
     <BrowserRouter>
         <Routes>
-
-        {/* <Route path="/" element={<Splash />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<CreateAccount />} /> 
-        <Route path="/restaurant" element={<Restaurant />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/home" element={<Home />} />
-        <Route path='rofile' element={<Profile/>}/> */}
-
-{/*                  
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<CreateAccount />} />
-                <Route path="/restaurant" element={<Restaurant />} />
-                <Route path="/product" element={<Product />} />
-                
-                > */}
-
             <Route>
-                <Route element={<PublicRouter isAutenticated={isLogged}/>}>
+                <Route element={<PublicRouter isAuthenticate={isLogged}/>}>
                     <Route path='/' element={<Splash/>}/>
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/register' element={<CreateAccount/>}/>
                 </Route>
-
-                <Route element={<PrivateRouter isAutenticated={isLogged}/>}>
+                <Route element={<PrivateRouter isAuthenticate={isLogged}/>}>
                     <Route path='/adresses' element={<ManageAdresses/>}/>
                     <Route path='/order' element={<Order/>}/>
                     <Route path='/current' element={<CurrentOrder/>}/>
@@ -85,7 +66,6 @@ const Router = () => {
                     <Route path="/restaurant" element={<Restaurant />} />
                     <Route path="/product" element={<Product />} />
                     <Route path='/home' element={<Home />} />
-
                 </Route>
             </Route>
         </Routes>

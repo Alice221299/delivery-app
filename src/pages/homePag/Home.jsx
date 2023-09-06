@@ -4,6 +4,7 @@ import location from "../../assets/Location.png";
 import arrow from "../../assets/Arrow.png";
 import hamburger from "../../assets/hamburger.png";
 import pizza from "../../assets/pizza.png";
+import asian from "../../assets/asian.png";
 import "./home.scss";
 import { useState } from "react";
 import Slider from "react-slick";
@@ -54,8 +55,6 @@ const Home = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  console.log("estos son los restaurantes", restaurants);
-console.log(products);
 
   return (
     <div>
@@ -114,6 +113,13 @@ console.log(products);
           >
             <img src={pizza} alt="Pizza" />
             <span>Pizza</span>
+          </button>
+          <button
+            className={`${selectedCategory === "Pizza"}`}
+            onClick={() => setSelectedCategory("Pizza")}
+          >
+            <img className="asian" src={asian} alt="Pizza" />
+            <span>Asian</span>
           </button>
         </div>
 

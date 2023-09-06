@@ -114,7 +114,7 @@ const CreateAccount = () => {
               {...register('birthdate', { required: 'Birthdate is required' })}
               className="create__none"
             />
-            {errors.name && <span className="error" style={{ color: 'red', fontSize: '10px' }}>{errors.address.message}</span>}
+            {errors.name && <span className="error" style={{ color: 'red', fontSize: '10px' }}>{errors.birthdate.message}</span>}
           </div>
           <div className='create__box__file'>
             <label className='create__label'>PROFILE PICTURE</label>
