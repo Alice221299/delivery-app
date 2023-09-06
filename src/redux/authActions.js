@@ -11,9 +11,6 @@ import {
 import loginFromFirestore from "../sevice/loginFromCollection";
 import { createAnUserInCollection, getUserFromCollection } from "../sevice/getUser";
 
-
-//Crear accion que nos va a permitir iniciar sesión con el código de verificación
-
 export const loginWithCode = (code) => {
     return async (dispatch) => {
         const confirmationResult = window.confirmationResult;
@@ -50,20 +47,6 @@ export const login = () => {
             console.log("respuesta de google", userCredential);
             const { user } = userCredential;
             const { user: userLogged, error } = await loginFromFirestore(user);
-            // let userLogged = await getUserFromCollection(userCredential.user.uid);
-            // if (!userLogged) {
-            //     const id = userCredential.user.uid;
-            //     const newUser = {
-            //         displayName: user.displayName,
-            //         photoURL: user.photoURL,
-            //         accessToken: user.accessToken
-            //     };
-            //     await createAnUserInCollection(id, newUser);
-            //     userLogged = {
-            //         id,
-            //         ...newUser
-            //     }
-            // } 
             if (userLogged) {
 
                 dispatch(setUserLogged(userLogged));
