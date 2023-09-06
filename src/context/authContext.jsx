@@ -8,7 +8,6 @@ export const useAuth = () => {
   const context = useContext(authContext);
   return context;
 }
-
 export function AuthProvider({ children }) {
   const signUp = async (email, password) => {
     try {
@@ -19,6 +18,9 @@ export function AuthProvider({ children }) {
       console.error('Error creating user:', error);
     }
   }
+
+
+
 
   return (
     <authContext.Provider value={{ signUp }}>

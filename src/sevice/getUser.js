@@ -1,11 +1,11 @@
 import { collection, doc, getDoc, getDocs, orderBy, query, setDoc,  where } from "firebase/firestore";
-import { fireStore } from "../firebase/firebaseConfig";
+import { firestore } from "../firebaseConfig";
 
 const collectionName = "users";
 
 export const getUserFromCollection = async (uid) => {
     try {
-        const userRef = doc(fireStore, collectionName, uid);
+        const userRef = doc(firestore, collectionName, uid);
         const user = await getDoc(userRef);
         if (user.exists()) {
             console.log("Document data:", user.data());
@@ -26,7 +26,7 @@ export const getUserFromCollection = async (uid) => {
 
 export const createAnUserInCollection = async (uid, newUser) => {
     try {
-        const newUserRef = doc(fireStore, collectionName, uid);
+        const newUserRef = doc(firestore, collectionName, uid);
         await setDoc(newUserRef, newUser);
         return {
             ok: true,
@@ -45,7 +45,7 @@ export const createAnUserInCollection = async (uid, newUser) => {
 
 export const searchDoc = async ({ collectionName, fieldName, searchTerm }) => {   
 
-    const collectionRef = collection(fireStore, collectionName);
+    const collectionRef = collection(firestore, collectionName);
     const q = query(collectionRef, where(fieldName, ">=", searchTerm), where(fieldName, "<=", searchTerm + '\uf8ff'), orderBy(fieldName));    
     try {
         const querySnapshot = await getDocs(q);

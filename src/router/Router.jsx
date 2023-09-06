@@ -21,6 +21,7 @@ import Verification from '../pages/verification/Verification'
 import Splash from '../pages/splash/Splash'
 import Footer from '../pages/footer/Footer'
 import Login from '../pages/login/Login'
+import LoginByEmailAndPassword from '../pages/loginByEmailAndPass/loginByEmailAndPass'
 
 
 const Router = () => {
@@ -30,21 +31,28 @@ const Router = () => {
     <BrowserRouter>
         <Routes>
 
-        
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Splash />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<CreateAccount />} /> 
+        <Route path="/restaurant" element={<Restaurant />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/home" element={<Home />} />
+
 {/*                 
 
-                <Route path="/home" element={<Home />} />
+                
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<CreateAccount />} />
                 <Route path="/restaurant" element={<Restaurant />} />
                 <Route path="/product" element={<Product />} />
-                <Route path="/splash" element={<Splash />} />
-                <Route path="/footer" element={<Footer />} /> */}
+                
+                > */}
 
             {/* <Route path='/'>
                 <Route element={<PublicRouter isAutenticated={isAutenticated}/>}>
+                    <Route path='' element={<Splash/>}/>
                     <Route path='login' element={<Login/>}/>
+                    <Route path='register' element={<CreateAccount/>}/>
                 </Route>
 
                 <Route element={<PrivateRouter isAutenticated={isAutenticated}/>}>
@@ -54,11 +62,14 @@ const Router = () => {
                     <Route path='accepted' element={<OrderAccepted/>}/>
                     <Route path='payment' element={<Payment/>}/>
                     <Route path='new-card' element={<NewCard/>}/>
-                    <Route path='/Search' element={<Search/>}/>
-                    <Route path='/AllOrders' element={<OrdersHistory/>}/>
-                    <Route path='/OrderData' element={<OrderData/>}/>
-                    <Route path='/Profile' element={<Profile/>}/>
-                    <Route path='/EditProfile' element={<EditProfile/>}/>
+                    <Route path='Search' element={<Search/>}/>
+                    <Route path='AllOrders' element={<OrdersHistory/>}/>
+                    <Route path='OrderData' element={<OrderData/>}/>
+                    <Route path='Profile' element={<Profile/>}/>
+                    <Route path='EditProfile' element={<EditProfile/>}/>
+                    <Route path="restaurant" element={<Restaurant />} />
+                    <Route path="product" element={<Product />} />
+                    <Route path="home" element={<Home />} />
 
                 </Route>
             </Route> */}
