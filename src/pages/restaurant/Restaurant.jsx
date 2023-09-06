@@ -96,7 +96,7 @@ const Restaurant = () => {
 
                                         return (
                                             <span key={starIndex} className="star-icon">
-                                                <FaStar className={starClass} />
+                                                {/* <FaStar className={starClass} /> */}
                                             </span>
                                         );
                                     })}
