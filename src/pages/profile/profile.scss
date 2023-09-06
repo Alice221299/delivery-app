@@ -1,3 +1,5 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/reset.scss";
 
 @mixin border-outline-none {
     border: none;
@@ -5,6 +7,15 @@
 }
 
 .user {
+    &__logout{
+        display: flex;
+        align-self: flex-end;
+        justify-content: center;
+        padding: 7px;
+        width: 60px;
+        font-family: $font-roboto;
+        color: $dark-grey;
+    }
     svg
     {
         cursor: pointer;
