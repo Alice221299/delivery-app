@@ -147,31 +147,31 @@ const handleBack = () => {
 
     return (
         <div className='product'>
-            <div>
-                <img
+            <div className='product__header'>
+                <img className='back'
                     src={back}
                     alt=""
                     onClick={handleBack}
                 />
                 {productSelected.length > 0 &&
-                    <img
+                    <img className='img'
                         src={productSelected[0].image}
                         alt={productSelected[0].name}
                     />
 
                 }
             </div>
-            <div>
-                <div>
-                    <div>
+            <div className='product__container'>
+                <div className='product__body'>
+                    <div className='product__body__title'>
                         <h2>{productSelected[0]?.name}</h2>
                         <span>
                             <img src={time} alt="" />
                             10 - 15 min
                         </span>
                     </div>
-                    <p>{productSelected[0]?.description}</p>
-                    <h3>Additional Ingredients</h3>
+                    <p className='product__body__description'>{productSelected[0]?.description}</p>
+                    {/* <h3>Additional Ingredients</h3> */}
 
                     {/* {productSelected?.ingredients && productSelected?.ingredients.map((ingredient, index) => (
                         <div key={index}>
@@ -187,13 +187,13 @@ const handleBack = () => {
                         </div>
                     ))} */}
                 </div>
-                <div>
-                    <div>
+                <div className='product__footer'>
+                    <div  className='product__footer__counter'>
                         <button onClick={() => handleQuantityChange(-1)}>-</button>
                         <span>{quantity}</span>
                         <button onClick={() => handleQuantityChange(1)}>+</button>
                     </div>
-                    <div onClick={handleOrderClick}>
+                    <div className='product__footer__add' onClick={handleOrderClick}>
                         <span> Add </span>
                         <span>$ {(calculateTotalPrice() * quantity).toFixed(2)}</span>
                     </div>
