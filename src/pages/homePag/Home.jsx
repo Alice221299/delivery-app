@@ -20,7 +20,6 @@ import FooterSearch from "../../components/footerSearch/FooterSearch";import { f
 
 
 const Home = () => {
-  // const { userData, setMainButtonVisible, isMainButtonVisible} = useAuth();
   const { restaurants } = useSelector((store) => store.restaurants);
   const { userLogged } = useSelector((store) => store.auth);
   const { products } = useSelector(store => store.products);
@@ -30,23 +29,10 @@ const Home = () => {
     dispatch(fillRestaurantsFromCollection());
     dispatch(fillProductsFromCollection())
     
-  }, [products, dispatch]);
+  }, [dispatch]);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const navigate = useNavigate();
-
-  const handleRestaurantClick = (restaurantId) => {
-    navigate(`/restaurant/${restaurantId}`);
-  };
-
-  // const goCurrent = () => {
-  //   setMainButtonVisible(true);
-  //   navigate('/current');
-  // };
-
-  // useEffect(() => {
-  //   localStorage.setItem('isMainButtonVisible', isMainButtonVisible.toString());
-  // }, [isMainButtonVisible]);
 
   const settings = {
     dots: true,
@@ -54,6 +40,10 @@ const Home = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+  };
+
+  const handleRestaurantClick = (restaurantId) => {
+    navigate(`/restaurant/${restaurantId}`);
   };
 
   return (
@@ -74,7 +64,7 @@ const Home = () => {
 
         <div className="carousel-container">
           <Slider {...settings} className="carousel">
-            {restaurants.map((restaurant, index) => (
+            {restaurants !== null ? restaurants.map((restaurant, index) => (
               <div
                 key={index}
                 className="carousel-slide"
@@ -88,7 +78,7 @@ const Home = () => {
                   alt={restaurant.name}
                 />
               </div>
-            ))}
+            )): null}
           </Slider>
         </div>
         <br />
@@ -124,7 +114,7 @@ const Home = () => {
         </div>
 
         <div>
-          {restaurants.map((restaurant, index) => {
+          {restaurants !== null ? restaurants.map((restaurant, index) => {
             if (
               selectedCategory === "All" ||
               (restaurant.categories &&
@@ -157,18 +147,17 @@ const Home = () => {
                         );
                       })}
                     </div>
-
                     <p>
                       {" "}
                       Work time: <span>{restaurant.preparation}</span>
                     </p>
-                    <p>Before you {restaurant.price}$</p>
+                    {/* <p>Before you {restaurant.price}$</p> */}
                   </div>
                 </div>
               );
             }
             return null;
-          })}
+          }): null}
         </div>
       </div>
       <FooterSearch statu={1} />

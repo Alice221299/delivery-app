@@ -211,8 +211,6 @@ const Profile = () => {
                 </div>
             </section>
             
-
-
             <FooterSearch statu={4} />
 
         </main>

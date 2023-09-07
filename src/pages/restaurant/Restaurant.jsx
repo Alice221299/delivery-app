@@ -73,7 +73,7 @@ const Restaurant = () => {
             <div className='restaurant__header'>
                 <div>
                     <div>
-                        <img src={selectedRestaurant.logo} alt="" />
+                        {/* <img src={selectedRestaurant.logo} alt="" /> */}
                     </div>
 
                     <div>
