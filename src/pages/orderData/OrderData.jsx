@@ -1,12 +1,16 @@
 import React from 'react'
 import './orderData.scss'
+import { useNavigate, useParams } from 'react-router-dom'
 import FooterSearch from '../../components/footerSearch/FooterSearch'
 import { useNavigate } from 'react-router-dom';
 import InfoOrder from '../../components/infoOrder/InfoOrder';
+import { useNavigate } from 'react-router-dom'
+
 
 
 const OrderData = () => {
 
+    const {idOrder} = useParams();
     const navigate = useNavigate();
     const handleNavigate = (ruta) => 
     {

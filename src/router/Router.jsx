@@ -61,7 +61,7 @@ const Router = () => {
                     <Route path='/new-card' element={<NewCard/>}/>
                     <Route path='/search' element={<Search/>}/>
                     <Route path='/allOrders' element={<OrdersHistory/>}/>
-                    <Route path='/orderData' element={<OrderData/>}/>
+                    <Route path='/orderData/:idOrder' element={<OrderData/>}/>
                     <Route path='/profile' element={<Profile/>}/>
                     <Route path='/editProfile' element={<EditProfile/>}/>
                     <Route path="/restaurant/:restaurantid" element={<Restaurant />} />

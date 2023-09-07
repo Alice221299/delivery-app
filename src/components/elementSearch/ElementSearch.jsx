@@ -1,18 +1,26 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import './elementSearch.scss'
-const ElementSearch = ({}) => 
+const ElementSearch = ({id, image, name, price}) => 
 {
+
+  const navigate = useNavigate();
+
+  const hanldeNavigate = (ruta) => 
+  {
+    navigate(`${ruta}`);
+  }
 
   return (
     
-    <span className='elementSearch'>
+    <span onClick={() => hanldeNavigate(`/product/${id}`)} className='elementSearch'>
         <figure className='elementSearch__figure'>
-            <img src="https://assets.unileversolutions.com/recipes-v2/115358.jpg" alt="Food" />
+            <img src={image} alt="Food" />
         </figure>
 
         <span className='elementSearch__data'>
-            <span className='nameFood'> Meat Pizza </span>
-            <span className='priceFood'> $ 29.00 </span>
+            <span className='nameFood'> {name}</span>
+            <span className='priceFood'> $ {price} </span>
         </span>
 
     </span>
