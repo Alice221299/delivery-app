@@ -163,7 +163,7 @@ const Home = () => {
           }): null}
         </div>
       </div>
-      <FooterSearch statu={1} />
+      {/* <FooterSearch statu={1} /> */}
     </div>
   );
 };

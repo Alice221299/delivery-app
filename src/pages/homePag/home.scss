@@ -51,32 +51,24 @@
     }
 
     &__restaurants-container {
+        button {
+            width: 18vw;
+            background-color: #e0e0e0;
+            margin: 0 5px;
+            padding: 5px 10px;
+            // color: #414141;
+            border: none;
+            text-align: center;
+            font-weight: 500;
+        }
         display: flex;
         margin: 20px 0;
-        // button{
-        //     background-color: $light-grey;
-        //     padding: 8px;
-        //     margin: 3px;
-        //     cursor: pointer;
-        // }
-    }
-
-    &__cart-button {
-        position: fixed;
-        bottom: 80px;
-        width: 90%;
-        align-self: center;
-        background-color: $main-yellow;
-        border: none;
-        border-radius: 10px;
-        display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-        color: $dark-grey;
-        font-size: 14px;
+        span{
+            color:$dark-grey;
+            background-color: #e0e0e0;
+        }
     }
-
     &__cart-orders {
         background-color: $dark-grey;
         padding: 3px 5px;
