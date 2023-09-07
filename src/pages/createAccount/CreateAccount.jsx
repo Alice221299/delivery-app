@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import uploadFile from '../../sevice/uploadFile';
 import { useDispatch, useSelector } from "react-redux";
-import back from '../../assets/back.png'
+// import back from '../../assets/back.png'
 
 const CreateAccount = () => {
   // const navigate = useNavigate();
