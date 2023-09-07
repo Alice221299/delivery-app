@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, loginWithEmailAndPassword } from "../../redux/authActions";
 import google from "../../assets/google.svg";
-import { useAuth } from "../../context/authContext";
+// import { useAuth } from "../../context/authContext";
 import { async } from "@firebase/util";
 
 const Login = () => {
@@ -45,7 +45,7 @@ const Login = () => {
       <div className="login__header">
         <img src={logo} alt="" />
         <h1>Sign in</h1>
-        <p>
+        <p className="login-text">
           Login or create an account with your phone number to start ordering
         </p>
       </div>
@@ -96,7 +96,7 @@ const Login = () => {
           Login
         </button>
       </form>
-      <button type="button" className="login__button" onClick={loginWithGoogle}>
+      <button type="button" className="login__button google" onClick={loginWithGoogle}>
         Sign in with Google
         <img src={google} alt="google icon" />
       </button>
