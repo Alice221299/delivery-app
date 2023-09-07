@@ -42,8 +42,9 @@ const Home = () => {
     slidesToScroll: 1,
   };
 
-  const handleRestaurantClick = (restaurantId) => {
-    navigate(`/restaurant/${restaurantId}`);
+  const handleRestaurantClick = (restaurantid) => {
+    navigate(`/restaurant/${restaurantid}`);
+    console.log(restaurantid);
   };
 
   return (
@@ -105,10 +106,10 @@ const Home = () => {
             <span>Pizza</span>
           </button>
           <button
-            className={`${selectedCategory === "Pizza"}`}
-            onClick={() => setSelectedCategory("Pizza")}
+            className={`${selectedCategory === "Asian"}`}
+            onClick={() => setSelectedCategory("Asian")}
           >
-            <img className="asian" src={asian} alt="Pizza" />
+            <img className="Asian" src={asian} alt="Asian" />
             <span>Asian</span>
           </button>
         </div>
@@ -151,7 +152,7 @@ const Home = () => {
                       {" "}
                       Work time: <span>{restaurant.preparation}</span>
                     </p>
-                    {/* <p>Before you {restaurant.price}$</p> */}
+                    <p>Before you {restaurant.price}$</p>
                   </div>
                 </div>
               );
