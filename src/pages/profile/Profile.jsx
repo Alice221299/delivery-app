@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import './profile.scss'
 import FooterSearch from '../../components/footerSearch/FooterSearch'
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../../redux/authActions';
+import { useDispatch } from 'react-redux';
 
 
 const Profile = () => {
+    
+    const dispatch = useDispatch();
 
     const [editProfil, setEditProfil] = useState(true);
 
@@ -22,6 +26,7 @@ const Profile = () => {
     return (
 
         <main className='user'>
+            <button className='user__logout' onClick={() => dispatch(logout())}>LogOut</button>
 
             <section className='user__info'>
 
@@ -206,8 +211,6 @@ const Profile = () => {
                 </div>
             </section>
             
-
-
             <FooterSearch statu={4} />
 
         </main>

@@ -88,3 +88,24 @@
         }
     }
 }
+
+@media (min-width: 600px) {
+    .main-current {
+        flex-direction: row;
+        justify-content: space-evenly;
+        .order-details {
+            min-width: 50%;
+            max-width: 60%;
+            .current-waiting {
+                margin-top: 3rem;
+                padding: 4rem 2rem;
+                gap: 2rem;
+            }
+            
+        }
+        .order-finish {
+            min-width: 30%;
+            margin-top: 10rem;
+        }
+    }
+}

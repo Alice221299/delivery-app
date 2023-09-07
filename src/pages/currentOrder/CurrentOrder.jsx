@@ -10,7 +10,7 @@ import "./current.scss"
 const CurrentOrder = () => {
   return (
     <main className='main-current'>
-        <div>
+        <div className='order-details'>
         <Bar text='Current order'/>
         <div className='current-waiting'>
             <img src={time} alt="Icon for time" />
@@ -53,7 +53,7 @@ const CurrentOrder = () => {
             </div>
         </div>
         </div>
-        <div>
+        <div className='order-finish'>
         <OrderTotal/>
         <MainButton text="Support"/>
         </div>
