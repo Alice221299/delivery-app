@@ -88,38 +88,36 @@
     &__footer{
         display: flex;
         align-self: end;
-        padding: 20px;
-        justify-content: center;
-        gap: 20px;
+        // padding: 20px;
+        justify-content: space-between;
         width: 100%;
-
+        padding: 0 10px 1rem 10px;
         &__counter{
             display: flex;
             justify-content: space-between;
-            gap: 40px;
+            gap: 25px;
             background-color: #e0e0e0;
             border-radius: 10px;
             padding: 5px 20px;
             align-items: center;
-
+            width: 30%;
             button {
-                width: 94%;
                 background-color: #e0e0e0;
                 margin: 0 5px;
                 color: #414141;
                 border: none;
                 text-align: center;
                 font-weight: 500;
+                width: fit-content;
             }
         }
         &__add{
             display: flex;
-            width: 94%;
+            width: 55%;
                 background-color: $main-yellow;
-                margin: 0 5px;
                 color: #414141;
                 border: none;
-                padding: 10px;
+                padding: 10px 30px;
                 text-align: center;
                 font-weight: 500;
                 border-radius: 10px;

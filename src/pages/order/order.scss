@@ -29,12 +29,14 @@
         display: flex;
         gap: 10px;
         overflow-x: scroll;
+        
         .method-name {
             display: flex;
-            min-width: 7rem;
+            min-width: 9rem;
+            width: fit-content;
             justify-content: center;
             align-items: center;
-            padding: 4px;
+            padding: 5px 10px;
             gap: 5px;
             background-color: $light-grey;
             border-radius: 5px;
@@ -42,7 +44,11 @@
             span {
                 font-size: 10px;
             }
+            
         }
+        .method-chosen {
+                background-color: $main-yellow;
+            }
     }
     // .payment-method::-webkit-scrollbar {
     //     display: none;
@@ -86,6 +92,7 @@
                     height: 50px;
                     width: 50px;
                     border-radius: 10px;
+                    object-fit: cover;
                 }
                 .item-counter {
                     padding: 7px;

@@ -4,7 +4,6 @@ import back from '../../assets/Back.png';
 import time from '../../assets/Time.png';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fillProductsFromCollection } from '../../redux/actions/productsActions';
@@ -12,77 +11,97 @@ import { setCurrentOrder } from '../../redux/reducers/orderReducer';
 
 const Product = () => {
 
-  const [ productSelected, setProductSelected] = useState({});
+  const [ productSelected, setProductSelected] = useState('');
   const { products } = useSelector((store) => store.products);
   const { userLogged } = useSelector(store => store.auth);
   const { currentOrder } = useSelector(store => store.order);
 
   const navigate = useNavigate();
-  const location = useLocation();
-
   const dispatch = useDispatch();
+//   const location = useLocation();
+  const [quantity, setQuantity] = useState(1);
+ 
 
   useEffect(() => {
     // dispatch(fillProductsFromCollection());
     setProductSelected(products.filter(product => product.id == productid))
-    // console.log("Este es el filtrado: ", products.filter(product => product.id == productid))
     
   }, []);
 
+console.log(productSelected);
 
-
-const initializeOrder = () => {
+  const initializeOrder = () => {
     if (currentOrder) {
-        const addedProduct = currentOrder.products.push(productSelected)
-        dispatch(setCurrentOrder(addedProduct))
-        navigate('/order')
-    } else {
-        const order = {
-            products: [...productSelected, productSelected.amount = quantity],
-            address: userLogged.address[0],
-            payment: userLogged.payment[0],
-            total: null
-        }
-        dispatch(setCurrentOrder(order))
-        navigate('/order')
+      const updatedOrder = {
+        ...currentOrder,
+        products: [
+          ...currentOrder.products,
+          { ...productSelected[0], amount: quantity },
+        ],
+      };
+      dispatch(setCurrentOrder(updatedOrder));
+      // navigate('/order')
+    } else if (currentOrder === null) {
+      const order = {
+        products: [{ ...productSelected[0], amount: quantity }],
+        address: userLogged.address[0],
+        payment: userLogged.payment[0],
+        total: null,
+      };
+      dispatch(setCurrentOrder(order));
+      // navigate('/order')
     }
-}
+  };
+  
+  
 
+  const { productid } = useParams();
+//   console.log("Este es el id del producto: ", productid)
+
+const handleBack = () => {
+    navigate(`/home`)
+};   
+ const increment = () => {
+        setQuantity(quantity + 1)
+    }
+
+    const decrement = () => {
+        if (quantity >1) {
+            setQuantity(quantity - 1)
+        }
+    }
 //   useEffect(() => {
 //     console.log("esta es la descripción del producto ", productSelected);
 //   }, [productSelected]);
   
-  const { productid } = useParams();
-  console.log("Este es el id del producto: ", productid)
 
-const handleBack = () => {
-    navigate(`/restaurant/${products[0].restaurantId}`)
-};
 
     
-    const searchParams = new URLSearchParams(location.search);
-    const restaurantId = searchParams.get('restaurantId');
-    const restaurantName = searchParams.get('restaurantName');
-    const dishId = searchParams.get('dishId');
+    // const searchParams = new URLSearchParams(location.search);
+    // const restaurantId = searchParams.get('restaurantId');
+    // const restaurantName = searchParams.get('restaurantName');
+    // const dishId = searchParams.get('dishId');
 
-    const [dishDetails, setDishDetails] = useState(null);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [selectedIngredients, setSelectedIngredients] = useState({});
-    const [quantity, setQuantity] = useState(1);
+    // const [dishDetails, setDishDetails] = useState(null);
+    // const [totalPrice, setTotalPrice] = useState(0);
+    // const [selectedIngredients, setSelectedIngredients] = useState({});
+    
 
 
-    const handleBackClick = () => {
-        if (restaurantId && restaurantName) {
-            navigate(`/restaurant/${restaurantId}`, { state: { restaurantName } });
-        } else {
-            navigate(`/restaurant/${restaurantId}`);
-        }
-    };
+    // const handleBackClick = () => {
+    //     if (restaurantId && restaurantName) {
+    //         navigate(`/restaurant/${restaurantId}`, { state: { restaurantName } });
+    //     } else {
+    //         navigate(`/restaurant/${restaurantId}`);
+    //     }
+    // };
 
-    const handleQuantityChange = (amount) => {
-        const newQuantity = Math.max(1, quantity + amount);
-        setQuantity(newQuantity);
-    };
+
+
+    // const handleQuantityChange = (amount) => {
+    //     const newQuantity = Math.max(1, quantity + amount);
+    //     setQuantity(newQuantity);
+    // };
 
     // const handleIngredientToggle = (index) => {
     //     setSelectedIngredients((prevSelected) => ({
@@ -91,78 +110,78 @@ const handleBack = () => {
     //     }));
     // };
 
-    const calculateTotalPrice = () => {
-        let total = productSelected[0]?.price || 0;
+    // const calculateTotalPrice = () => {
+    //     let total = productSelected[0]?.price || 0;
 
-        if (productSelected[0]?.ingredients) {
-            total += productSelected[0].ingredients.reduce((acc, _, index) => {
-                return acc + (selectedIngredients[index] ? 2000 : 0);
-            }, 0);
-        }
+    //     if (productSelected[0]?.ingredients) {
+    //         total += productSelected[0].ingredients.reduce((acc, _, index) => {
+    //             return acc + (selectedIngredients[index] ? 2000 : 0);
+    //         }, 0);
+    //     }
 
-        return total;
-    };
+    //     return total;
+    // };
 
-    useEffect(() => {
-        const fetchDishDetails = async () => {
-            try {
-                const db = getFirestore();
-                const dishDocRef = doc(db, 'restaurants', restaurantId, 'menu', dishId);
-                const dishDocSnap = await getDoc(dishDocRef);
+    // useEffect(() => {
+    //     const fetchDishDetails = async () => {
+    //         try {
+    //             const db = getFirestore();
+    //             const dishDocRef = doc(db, 'restaurants', restaurantId, 'menu', dishId);
+    //             const dishDocSnap = await getDoc(dishDocRef);
 
-                if (dishDocSnap.exists()) {
-                    const dishData = dishDocSnap.data();
-                    setDishDetails(dishData);
+    //             if (dishDocSnap.exists()) {
+    //                 const dishData = dishDocSnap.data();
+    //                 setDishDetails(dishData);
 
-                    const initialSelectedIngredients = dishData.ingredients.reduce((acc, _, index) => {
-                        return {
-                            ...acc,
-                            [index]: selectedIngredients[index] || false,
-                        };
-                    }, {});
-                    setSelectedIngredients(initialSelectedIngredients);
+    //                 const initialSelectedIngredients = dishData.ingredients.reduce((acc, _, index) => {
+    //                     return {
+    //                         ...acc,
+    //                         [index]: selectedIngredients[index] || false,
+    //                     };
+    //                 }, {});
+    //                 setSelectedIngredients(initialSelectedIngredients);
 
 
-                    let initialPrice = productSelected[0].price || 0;
-                    if (productSelected[0].ingredients) {
-                        initialPrice += productSelected[0].ingredients.filter((_, index) => initialSelectedIngredients[index]).length * 2;
-                    }
-                    setTotalPrice(initialPrice);
+    //                 let initialPrice = productSelected[0].price || 0;
+    //                 if (productSelected[0].ingredients) {
+    //                     initialPrice += productSelected[0].ingredients.filter((_, index) => initialSelectedIngredients[index]).length * 2;
+    //                 }
+    //                 setTotalPrice(initialPrice);
 
-                } else {
-                    console.log('No such document!');
-                }
-            } catch (error) {
-                console.error('Error fetching dish details:', error);
-            }
-        };
+    //             } else {
+    //                 console.log('No such document!');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching dish details:', error);
+    //         }
+    //     };
 
-        const savedQuantity = localStorage.getItem('selectedQuantity');
-        if (savedQuantity) {
-            setQuantity(Number(savedQuantity));
-        }
+    //     const savedQuantity = localStorage.getItem('selectedQuantity');
+    //     if (savedQuantity) {
+    //         setQuantity(Number(savedQuantity));
+    //     }
 
-        if (restaurantId && dishId) {
-            fetchDishDetails();
-        }
-    }, [dishDetails, selectedIngredients]);
+    //     if (restaurantId && dishId) {
+    //         fetchDishDetails();
+    //     }
+    // }, [dishDetails, selectedIngredients]);
 
-    useEffect(() => {
-        localStorage.setItem('selectedQuantity', quantity.toString());
-    }, [quantity]);
+    // useEffect(() => {
+    //     localStorage.setItem('selectedQuantity', quantity.toString());
+    // }, [quantity]);
 
-    const handleOrderClick = () => {
-        if (productSelected[0]) {
-            navigate('/order', {
-                state: {
-                    dish: productSelected[0],
-                    selectedIngredients,
-                    initialQuantity: quantity,
-                    totalAmount: calculateTotalPrice() * quantity,
-                },
-            });
-        }
-    };
+    // const handleOrderClick = () => {
+    //     if (productSelected[0]) {
+    //         navigate('/order', {
+    //             state: {
+    //                 dish: productSelected[0],
+    //                 selectedIngredients,
+    //                 initialQuantity: quantity,
+    //                 totalAmount: calculateTotalPrice() * quantity,
+    //             },
+    //         });
+    //     }
+    // };
 
 
     return (
@@ -209,13 +228,14 @@ const handleBack = () => {
                 </div>
                 <div className='product__footer'>
                     <div  className='product__footer__counter'>
-                        <button onClick={() => handleQuantityChange(-1)}>-</button>
+                        <span onClick={decrement}>-</span>
                         <span>{quantity}</span>
-                        <button onClick={() => handleQuantityChange(1)}>+</button>
+                        <span onClick={increment}>+</span>
                     </div>
                     <div className='product__footer__add' onClick={initializeOrder}>
                         <span> Add </span>
-                        <span>$ {(calculateTotalPrice() * quantity).toFixed(2)}</span>
+                        <span>{productSelected[0]?.price * quantity} $</span>
+                        {/* <span>$ {(calculateTotalPrice() * quantity).toFixed(2)}</span> */}
                     </div>
                 </div>
             </div>

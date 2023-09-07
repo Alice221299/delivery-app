@@ -32,25 +32,6 @@ export const createAnOrderAction = (newOrder) => async (dispatch) => {
     }
 }
 
-// const dispatch = useDispatch();
-// const { userLogged } = useSelector(store => store.auth);
-// const { currentOrder } = useSelector(store => store.order);
-
-// const initializeOrder = () => {
-//     if (currentOrder) {
-//         const addedProduct = currentOrder.products.push(product)
-//         dispatch(setCurrentOrder(addedProduct))
-//     } else {
-//         const order = {
-//             products: [...product, product.amount = amount],
-//             address: userLogged.directions[0],
-//             payment: userLogged.payment[0],
-//             total: products.forEach((product) => total += product.price * product.amount) + 5
-//         }
-//         dispatch(setCurrentOrder(order))
-//     }
-// }
-
 // const productArray = []
 // currentOrder.products.forEach((product) => {
 //     const newProduct = {
@@ -73,7 +54,3 @@ export const createAnOrderAction = (newOrder) => async (dispatch) => {
 //     navigate('/accepted')
 // }
 
-// const changePayment = (method) => {
-//     const newPayment = [...currentOrder, currentOrder.payment = method]
-//     dispatch(setCurrentOrder(newPayment))
-// }
