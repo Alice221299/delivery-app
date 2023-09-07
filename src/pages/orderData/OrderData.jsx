@@ -1,14 +1,60 @@
 import React from 'react'
 import './orderData.scss'
+import { useEffect, useState } from 'react'
+
 import { useNavigate, useParams } from 'react-router-dom'
 import FooterSearch from '../../components/footerSearch/FooterSearch'
 import InfoOrder from '../../components/infoOrder/InfoOrder';
+import { useDispatch, useSelector } from 'react-redux';
+import { fillOrdersFromCollection } from '../../redux/actions/orderActions';
 
 
 
 const OrderData = () => {
 
     const {idOrder} = useParams();
+
+    const { orders } = useSelector(store => store.order);
+    const dispatch = useDispatch();
+    const [ordersUser, setOrdersUser] = useState([]);
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+      dispatch(fillOrdersFromCollection());
+
+   
+      
+      
+      
+    }, [dispatch]);
+
+
+    useEffect(()=> 
+    {
+        if(orders.length > 0) 
+        {
+            console.log('EXISTEN, SON ESTAS: ', orders);
+            setOrdersUser(orders.filter(order => order.id == idOrder) );
+        }
+    }, [orders])
+
+    useEffect(()=> 
+    {
+        if (ordersUser.length > 0)
+        {
+            console.log('ESTE ES: ', ordersUser);
+            setProducts(ordersUser[0].products);
+        }
+    }, [ordersUser])
+
+    useEffect(()=> 
+    {
+        if (products.length > 0)
+        {
+            console.log('ESTE ES PRO: ', products);
+            
+        }
+    }, [products])
+
     const navigate = useNavigate();
     const handleNavigate = (ruta) => 
     {
@@ -27,10 +73,9 @@ const OrderData = () => {
 
             <div className='ordersAll__order infoOrderData'>
 
-                <InfoOrder/>
-                <InfoOrder/>
-                <InfoOrder/>
-                <InfoOrder/>
+
+                
+                {ordersUser.length > 0 ? products.length > 0 && products.map(orderUser => ( <InfoOrder key={orderUser.id} cantidad={1} name={orderUser.name} valor={ordersUser.price}  /> )): <h1>Ninguno</h1>}
 
             </div>
 
