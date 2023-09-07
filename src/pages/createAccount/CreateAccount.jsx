@@ -97,11 +97,11 @@ const CreateAccount = () => {
             {errors.email && <span className="error" style={{ color: 'red', fontSize: '10px' }}>{errors.email.message}</span>}
           </div>
           <div className='create__box'>
-            <label className='create__label'>ADDRESS</label>
+            <label className='create__label'>ADDRES</label>
             <input
               type="text"
-              name="address"
-              {...register('address', { required: 'Address is required' })}
+              name="addres"
+              {...register('addres', { required: 'Addres is required' })}
               className="create__input"
             />
             {errors.name && <span className="error" style={{ color: 'red', fontSize: '10px' }}>{errors.address.message}</span>}
