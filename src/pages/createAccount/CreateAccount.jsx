@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import React from 'react';
 import { createAnUser } from "../../redux/authActions";
-import { useAuth } from '../../context/authContext';
+// import { useAuth } from '../../context/authContext';
 import './createAccount.scss';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';

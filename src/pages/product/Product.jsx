@@ -2,12 +2,63 @@ import React from 'react'
 import './product.scss'
 import back from '../../assets/Back.png';
 import time from '../../assets/Time.png';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fillRestaurantsFromCollection } from '../../redux/actions/restaurantsActions';
+import { fillProductsFromCollection } from '../../redux/actions/productsActions';
+import { setIsLogged, setUserLogged } from '../../redux/authReducer';
+import { setCurrentOrder } from '../../redux/reducers/orderReducer';
 
 const Product = () => {
+
+  const { restaurants } = useSelector((store) => store.restaurants);
+  const [ productSelected, setProductSelected] = useState({});
+  const { products } = useSelector((store) => store.products);
+  const { userLogged } = useSelector(store => store.auth);
+  const { currentOrder } = useSelector(store => store.order);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fillProductsFromCollection());
+    setProductSelected(products.filter(product => product.id == productid))
+    console.log("Este es el filtrado: ", products.filter(product => product.id == productid))
+    
+  }, []);
+
+
+
+const initializeOrder = () => {
+    if (currentOrder) {
+        const addedProduct = currentOrder.products.push(productSelected)
+        dispatch(setCurrentOrder(addedProduct))
+        navigate('/order')
+    } else {
+        const order = {
+            products: [...productSelected, productSelected.amount = quantity],
+            address: userLogged.address,
+            payment: null,
+            total: null
+        }
+        dispatch(setCurrentOrder(order))
+        navigate('/order')
+    }
+}
+
+  useEffect(() => {
+    console.log("esta es la descripción del producto ", productSelected);
+  }, [productSelected]);
+  
+  const { productid } =useParams();
+  console.log("Este es el id del producto: ", productid)
+
+const handleBack = () => {
+    navigate(`/restaurant/${products[0].restaurantId}`)
+};
+
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -19,6 +70,7 @@ const Product = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [selectedIngredients, setSelectedIngredients] = useState({});
     const [quantity, setQuantity] = useState(1);
+
 
     const handleBackClick = () => {
         if (restaurantId && restaurantName) {
@@ -41,10 +93,10 @@ const Product = () => {
     };
 
     const calculateTotalPrice = () => {
-        let total = dishDetails?.price || 0;
+        let total = productSelected[0]?.price || 0;
 
-        if (dishDetails?.ingredients) {
-            total += dishDetails.ingredients.reduce((acc, _, index) => {
+        if (productSelected[0]?.ingredients) {
+            total += productSelected[0].ingredients.reduce((acc, _, index) => {
                 return acc + (selectedIngredients[index] ? 2000 : 0);
             }, 0);
         }
@@ -72,9 +124,9 @@ const Product = () => {
                     setSelectedIngredients(initialSelectedIngredients);
 
 
-                    let initialPrice = dishData.price || 0;
-                    if (dishData.ingredients) {
-                        initialPrice += dishData.ingredients.filter((_, index) => initialSelectedIngredients[index]).length * 2;
+                    let initialPrice = productSelected[0].price || 0;
+                    if (productSelected[0].ingredients) {
+                        initialPrice += productSelected[0].ingredients.filter((_, index) => initialSelectedIngredients[index]).length * 2;
                     }
                     setTotalPrice(initialPrice);
 
@@ -101,10 +153,10 @@ const Product = () => {
     }, [quantity]);
 
     const handleOrderClick = () => {
-        if (dishDetails) {
+        if (productSelected[0]) {
             navigate('/order', {
                 state: {
-                    dish: dishDetails,
+                    dish: productSelected[0],
                     selectedIngredients,
                     initialQuantity: quantity,
                     totalAmount: calculateTotalPrice() * quantity,
@@ -120,28 +172,29 @@ const Product = () => {
                 <img
                     src={back}
                     alt=""
-                    onClick={handleBackClick}
+                    onClick={handleBack}
                 />
-                {dishDetails && (
+                {productSelected.length > 0 &&
                     <img
-                        src={dishDetails.image}
-                        alt={dishDetails.name}
+                        src={productSelected[0].image}
+                        alt={productSelected[0].name}
                     />
-                )}
+
+                }
             </div>
             <div>
                 <div>
                     <div>
-                        <h2>{dishDetails?.name}</h2>
+                        <h2>{productSelected[0]?.name}</h2>
                         <span>
                             <img src={time} alt="" />
-                            {dishDetails?.time}
+                            10 - 15 min
                         </span>
                     </div>
-                    <p>{dishDetails?.description}</p>
+                    <p>{productSelected[0]?.description}</p>
                     <h3>Additional Ingredients</h3>
 
-                    {dishDetails?.ingredients && dishDetails?.ingredients.map((ingredient, index) => (
+                    {/* {productSelected?.ingredients && productSelected?.ingredients.map((ingredient, index) => (
                         <div key={index}>
                             <div>
                                 <input
@@ -153,7 +206,7 @@ const Product = () => {
                             </div>
                             <span>{selectedIngredients[index] ? '+ $ 2000' : ''}</span>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
                 <div>
                     <div>
@@ -161,7 +214,7 @@ const Product = () => {
                         <span>{quantity}</span>
                         <button onClick={() => handleQuantityChange(1)}>+</button>
                     </div>
-                    <div onClick={handleOrderClick}>
+                    <div onClick={initializeOrder}>
                         <span> Add </span>
                         <span>$ {(calculateTotalPrice() * quantity).toFixed(2)}</span>
                     </div>

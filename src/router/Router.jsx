@@ -45,8 +45,8 @@ const Router = () => {
   return (
     <BrowserRouter>
         <Routes>
-                <Route path="/restaurant" element={<Restaurant />}/>
-            {/* <Route>
+                {/* <Route path="/restaurant" element={<Restaurant />}/> */}
+            <Route>
                 <Route element={<PublicRouter isAuthenticate={isLogged}/>}>
                     <Route path='/' element={<Splash/>}/>
                     <Route path='/login' element={<Login/>}/>
@@ -64,11 +64,11 @@ const Router = () => {
                     <Route path='/orderData' element={<OrderData/>}/>
                     <Route path='/profile' element={<Profile/>}/>
                     <Route path='/editProfile' element={<EditProfile/>}/>
-                    <Route path="/restaurant" element={<Restaurant />} />
-                    <Route path="/product" element={<Product />} />
+                    <Route path="/restaurant/:restaurantid" element={<Restaurant />} />
+                    <Route path="/product/:productid" element={<Product />} />
                     <Route path='/home' element={<Home />} />
                 </Route>
-            </Route> */}
+            </Route>
         </Routes>
     </BrowserRouter>
 )}
