@@ -34,6 +34,7 @@ const Restaurant = () => {
     console.log("este es el valor del id del producto ", products[1].restaurantId)
     console.log("Este es el id del restaurante ", restaurantid)
   }, []);
+  console.log('products', products)
 
   useEffect(() => {
     console.log("estos son los productos ", productsRestaurants);
