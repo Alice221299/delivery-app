@@ -9,25 +9,36 @@ import { useLocation, useNavigate } from "react-router-dom";
 import mastercard from "/icons/MasterCard.png";
 import visa from "/icons/visa.svg";
 import amex from "/icons/american-express.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setCurrentOrder } from "../../redux/reducers/orderReducer";
+import { setAmountProduct } from "../../redux/reducers/orderReducer";
 
 const Order = () => {
-    const { currentOrder } = useSelector((store) => store.order);
-  const [value, setValue] = useState(currentOrder.products[0].amount);
+  const { currentOrder } = useSelector((store) => store.order);
   const { userLogged } = useSelector((store) => store.auth);
-  
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   console.log(currentOrder);
 
-  const increment = () => {
-    setValue(value + 1);
+  const increment = (index, amount) => {
+    const currentAmount = amount + 1
+    dispatch(setAmountProduct({
+      index, amount: currentAmount
+    }));
   };
 
-  const decrement = () => {
-    if (value > 1) {
-      setValue(value - 1);
+  const decrement = (index, amount) => {
+    
+    if (amount > 1) {
+      const currentAmount = amount - 1;
+      dispatch(
+        setAmountProduct({
+          index,
+          amount: currentAmount,
+        })
+      );
     }
   };
 
@@ -67,30 +78,6 @@ const Order = () => {
     return maskedCardNumber;
   };
 
-  const productArray = []
-currentOrder.products.forEach((product) => {
-    const newProduct = {
-        amount: product.amount,
-        name: product.name,
-        price: product.price * product.amount
-    }
-    productArray.push(newProduct)
-})
-
-const sendOrder = () => {
-    console.log('sent');
-    const newOrder = {
-        idRestaurant: currentOrder.products[0].restaurantId,
-        idUser: userLogged.id,
-        products: productArray,
-        state: 'confirmed'
-    }
-    dispatch(createAnOrderAction(newOrder))
-    dispatch(setCurrentOrder(null))
-    navigate('/accepted')
-}
-// const location = useLocation()
-// console.log(location);
 
   return (
     <main className="main-order">
@@ -135,19 +122,19 @@ const sendOrder = () => {
           </div>
         </div>
         <div className="order-items">
-          {currentOrder.products.map((product) => (
+          {currentOrder.products.map((product, index) => (
             <div className="item">
               <div className="item-info">
                 <img src={product.image} alt="" />
                 <div className="item-counter">
-                  <p onClick={decrement}>-</p>
-                  <p>{value}</p>
-                  <p onClick={increment}>+</p>
+                  <p onClick={() => decrement(index, product.amount)}>-</p>
+                  <p>{product.amount}</p>
+                  <p onClick={() => increment(index, product.amount)}>+</p>
                 </div>
                 <p>{product.name}</p>
               </div>
               <span className="item-price">
-                $ <p>{product.price}</p>
+                $ <p>{product.price * product.amount}</p>
               </span>
             </div>
           ))}
@@ -159,7 +146,7 @@ const sendOrder = () => {
       </div>
       <div className="order-finish">
         <OrderTotal />
-        <MainButton text="Order"/>
+        <MainButton text="Order" />
       </div>
     </main>
   );

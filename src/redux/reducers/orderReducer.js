@@ -25,10 +25,15 @@ const ordersSlice = createSlice({
         },
         setError: (state, action) => {
             state.error = action.payload;
+        },
+        setAmountProduct: (state, action) => {
+            const { payload } = action;
+            state.currentOrder.products[payload.index].amount = payload.amount;
         }
     }
 })
 
-export const { setOrders, addOrder, setCurrentOrder, setError } = ordersSlice.actions;
+export const { setOrders, addOrder, setCurrentOrder, setError, setAmountProduct } =
+  ordersSlice.actions;
   
 export default ordersSlice.reducer;
