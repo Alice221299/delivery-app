@@ -3,12 +3,19 @@ import './profile.scss'
 import FooterSearch from '../../components/footerSearch/FooterSearch'
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/authActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Profile = () => {
     
+
+
+    const { userLogged } = useSelector((store) => store.auth);
     const dispatch = useDispatch();
+
+    console.log(userLogged);
+
+
 
     const [editProfil, setEditProfil] = useState(true);
 
@@ -31,9 +38,9 @@ const Profile = () => {
             <section className='user__info'>
 
                 <figure className='figureUser'>
-                    <img className='imgUser' src="https://content.wepik.com/statics/20906796/preview-page0.jpg" alt="profil" />
+                    <img className='imgUser' src={userLogged.photoURL} alt="profil" />
                 </figure>
-                <span className='nameUser'><b>Donnie Darko</b></span>
+                <span className='nameUser'><b>{userLogged.name}</b></span>
 
             </section>
 
