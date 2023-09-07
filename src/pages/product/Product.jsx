@@ -10,22 +10,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fillRestaurantsFromCollection } from '../../redux/actions/restaurantsActions';
 import { fillProductsFromCollection } from '../../redux/actions/productsActions';
 import { setIsLogged, setUserLogged } from '../../redux/authReducer';
+import { setCurrentOrder } from '../../redux/reducers/orderReducer';
 
 const Product = () => {
 
   const { restaurants } = useSelector((store) => store.restaurants);
   const [ productSelected, setProductSelected] = useState({});
   const { products } = useSelector((store) => store.products);
+  const { userLogged } = useSelector(store => store.auth);
+  const { currentOrder } = useSelector(store => store.order);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fillRestaurantsFromCollection());
     dispatch(fillProductsFromCollection());
     setProductSelected(products.filter(product => product.id == productid))
     console.log("Este es el filtrado: ", products.filter(product => product.id == productid))
     
   }, []);
+
+
+
+const initializeOrder = () => {
+    if (currentOrder) {
+        const addedProduct = currentOrder.products.push(productSelected)
+        dispatch(setCurrentOrder(addedProduct))
+        navigate('/order')
+    } else {
+        const order = {
+            products: [...productSelected, productSelected.amount = quantity],
+            address: userLogged.address,
+            payment: null,
+            total: null
+        }
+        dispatch(setCurrentOrder(order))
+        navigate('/order')
+    }
+}
 
   useEffect(() => {
     console.log("esta es la descripción del producto ", productSelected);
@@ -193,7 +214,7 @@ const handleBack = () => {
                         <span>{quantity}</span>
                         <button onClick={() => handleQuantityChange(1)}>+</button>
                     </div>
-                    <div onClick={handleOrderClick}>
+                    <div onClick={initializeOrder}>
                         <span> Add </span>
                         <span>$ {(calculateTotalPrice() * quantity).toFixed(2)}</span>
                     </div>

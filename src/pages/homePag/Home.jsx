@@ -17,12 +17,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fillRestaurantsFromCollection } from "../../redux/actions/restaurantsActions";
 import { FaStar } from "react-icons/fa";
 import FooterSearch from "../../components/footerSearch/FooterSearch";import { fillProductsFromCollection } from '../../redux/actions/productsActions';
+import Basket from "../../components/basket/Basket";
 
 
 const Home = () => {
   const { restaurants } = useSelector((store) => store.restaurants);
   const { userLogged } = useSelector((store) => store.auth);
   const { products } = useSelector(store => store.products);
+  const { currentOrder } = useSelector(store => store.order);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -167,3 +169,7 @@ const Home = () => {
 };
 
 export default Home;
+
+// {currentOrder && 
+//   <Basket/>
+//   }

@@ -5,16 +5,17 @@ import next from "/icons/Next.svg"
 import MainButton from '../../components/mainButton/MainButton'
 import OrderTotal from '../../components/orderTotal/OrderTotal'
 import "./order.scss"
-import food from "/icons/anh-nguyen-kcA-c3f_3FE-unsplash.jpg"
 import { useNavigate } from 'react-router-dom'
 import mastercard from "/icons/MasterCard.png"
 import visa from "/icons/visa.svg"
 import amex from "/icons/american-express.svg"
+import { useSelector } from 'react-redux'
 
 const Order = () => {
 
     const [value, setValue] = useState(1)
     const { userLogged } = useSelector(store => store.auth);
+    const { currentOrder } = useSelector(store => store.order);
     const navigate = useNavigate()
 
     const increment = () => {
@@ -59,7 +60,7 @@ const Order = () => {
             <div className='order-location'>
                 <div className='order-adress'>
                     <img src={location} alt="Icon for location" />
-                    <p>{userLogged.directions[0]}</p>
+                    <p>{userLogged.address}</p>
                 </div>
                 <img className='arrow-forward' src={next} alt="Icon for go forward" onClick={handleClick}/>
             </div>
@@ -70,33 +71,40 @@ const Order = () => {
                 <div className='method-name'>
                     <p>Cash</p>
                 </div>
-                {
+                {/* {
                     userLogged.payment.map((method) => (
                         <div className='method-name'>
                             <img src={getInfoCard(method)} alt="" />
                             <span>{method}</span>
                         </div>
                     ))
-                }
+                } */}
                 <div className='method-name' onClick={handlePayment}>
                     <span>Add new method</span>
                 </div>
             </div>
         </div>
         <div className='order-items'>
-            <div className='item'>
-                <div className='item-info'>
-                    <img src={food} alt="" />
+            
+                {
+                    currentOrder.products.map((product) => (
+                        <div className='item'>
+                        <div className='item-info'>
+                    <img src={product.image} alt="" />
                     <div className='item-counter'>
                         <p onClick={decrement}>-</p>
-                        <p>{value}</p>
+                        <p>{product.amount}</p>
                         <p onClick={increment}>+</p>
                     </div>
-                    <p>Pizza</p>
+                    <p>{product.name}</p>
                 </div>
-                
-                <span className='item-price'>$ <p>13</p></span>
+                <span className='item-price'>$ <p>{product.price}</p></span>
             </div>
+                    ))
+                }
+                
+                
+                
         </div>
         <div className='order-write'>
             <h2>Note</h2>
