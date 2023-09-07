@@ -7,25 +7,25 @@ import { useState } from 'react';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fillRestaurantsFromCollection } from '../../redux/actions/restaurantsActions';
 import { fillProductsFromCollection } from '../../redux/actions/productsActions';
-import { setIsLogged, setUserLogged } from '../../redux/authReducer';
 import { setCurrentOrder } from '../../redux/reducers/orderReducer';
 
 const Product = () => {
 
-  const { restaurants } = useSelector((store) => store.restaurants);
   const [ productSelected, setProductSelected] = useState({});
   const { products } = useSelector((store) => store.products);
   const { userLogged } = useSelector(store => store.auth);
   const { currentOrder } = useSelector(store => store.order);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fillProductsFromCollection());
+    // dispatch(fillProductsFromCollection());
     setProductSelected(products.filter(product => product.id == productid))
-    console.log("Este es el filtrado: ", products.filter(product => product.id == productid))
+    // console.log("Este es el filtrado: ", products.filter(product => product.id == productid))
     
   }, []);
 
@@ -39,8 +39,8 @@ const initializeOrder = () => {
     } else {
         const order = {
             products: [...productSelected, productSelected.amount = quantity],
-            address: userLogged.address,
-            payment: null,
+            address: userLogged.address[0],
+            payment: userLogged.payment[0],
             total: null
         }
         dispatch(setCurrentOrder(order))
@@ -48,19 +48,18 @@ const initializeOrder = () => {
     }
 }
 
-  useEffect(() => {
-    console.log("esta es la descripción del producto ", productSelected);
-  }, [productSelected]);
+//   useEffect(() => {
+//     console.log("esta es la descripción del producto ", productSelected);
+//   }, [productSelected]);
   
-  const { productid } =useParams();
+  const { productid } = useParams();
   console.log("Este es el id del producto: ", productid)
 
 const handleBack = () => {
     navigate(`/restaurant/${products[0].restaurantId}`)
 };
 
-    const navigate = useNavigate();
-    const location = useLocation();
+    
     const searchParams = new URLSearchParams(location.search);
     const restaurantId = searchParams.get('restaurantId');
     const restaurantName = searchParams.get('restaurantName');
@@ -85,12 +84,12 @@ const handleBack = () => {
         setQuantity(newQuantity);
     };
 
-    const handleIngredientToggle = (index) => {
-        setSelectedIngredients((prevSelected) => ({
-            ...prevSelected,
-            [index]: !prevSelected[index],
-        }));
-    };
+    // const handleIngredientToggle = (index) => {
+    //     setSelectedIngredients((prevSelected) => ({
+    //         ...prevSelected,
+    //         [index]: !prevSelected[index],
+    //     }));
+    // };
 
     const calculateTotalPrice = () => {
         let total = productSelected[0]?.price || 0;

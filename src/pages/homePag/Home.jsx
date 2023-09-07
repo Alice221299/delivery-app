@@ -164,12 +164,13 @@ const Home = () => {
         </div>
       </div>
       <FooterSearch statu={1} />
+      {currentOrder && 
+        <Basket/>
+      }
     </div>
   );
 };
 
 export default Home;
 
-// {currentOrder && 
-//   <Basket/>
-//   }
+// 

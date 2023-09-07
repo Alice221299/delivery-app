@@ -60,7 +60,7 @@ const Order = () => {
             <div className='order-location'>
                 <div className='order-adress'>
                     <img src={location} alt="Icon for location" />
-                    <p>{userLogged.address}</p>
+                    <p>{userLogged.address[0]}</p>
                 </div>
                 <img className='arrow-forward' src={next} alt="Icon for go forward" onClick={handleClick}/>
             </div>
@@ -71,14 +71,14 @@ const Order = () => {
                 <div className='method-name'>
                     <p>Cash</p>
                 </div>
-                {/* {
+                {
                     userLogged.payment.map((method) => (
                         <div className='method-name'>
                             <img src={getInfoCard(method)} alt="" />
                             <span>{method}</span>
                         </div>
                     ))
-                } */}
+                }
                 <div className='method-name' onClick={handlePayment}>
                     <span>Add new method</span>
                 </div>
