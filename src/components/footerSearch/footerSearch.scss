@@ -1,19 +1,18 @@
 @import "../../assets/styles/variables.scss";
 @import "../../assets/styles/reset.scss";
 
-.footerSearch 
-{
+.footerSearch {
     width: 100vw;
-    height: 80px;
+    height: 55px;
     position: fixed;
     bottom: 0;
     display: flex;
     justify-content: space-between;
-
+    background-color: $light-grey;
     align-items: center;
     align-content: center;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 26px;
+    padding-right: 26px;
 
     .searched
     {

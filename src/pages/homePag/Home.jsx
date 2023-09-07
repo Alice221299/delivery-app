@@ -59,7 +59,7 @@ const Home = () => {
           <div>
             <p className="home__text">DELIVER TO</p>
             <p>
-              {userLogged && userLogged.address}
+              {userLogged && userLogged.addres}
               <img className="home__arrow-icon" src={arrow} alt="" />
             </p>
           </div>
@@ -77,7 +77,7 @@ const Home = () => {
               >
                 <img
                   className="carousel-image"
-                  src={restaurant.image}
+                  src={restaurant.banner}
                   alt={restaurant.name}
                 />
               </div>
@@ -128,7 +128,7 @@ const Home = () => {
                   key={index}
                   onClick={() => handleRestaurantClick(restaurant.id)}
                 >
-                  <img className="imgList" src={restaurant.logo} alt={restaurant.name} />
+                  <img className="imgList" src={restaurant.image} alt={restaurant.name} />
 
                   <div>
                     <p>{restaurant.name}</p>
@@ -169,7 +169,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// {currentOrder && 
-//   <Basket/>
-//   }

@@ -79,7 +79,7 @@ const Restaurant = () => {
       }
     };
 
-    fetchRestaurantDetails();
+    // fetchRestaurantDetails();
   }, [restaurantid]);
 
   if (!selectedRestaurant) {
@@ -122,7 +122,7 @@ const Restaurant = () => {
             <img className="restaurant__middle__img" src={selectedRestaurant.image} alt={selectedRestaurant.name} />
             <div className="restaurant__middle__info">
               <p className="title">{selectedRestaurant.name}</p>
-              <p>{selectedRestaurant.description}</p>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates</p>
               <div className="star-time">
                 <div className="star">
                   {Array.from({ length: 5 }).map((_, starIndex) => {
@@ -146,11 +146,6 @@ const Restaurant = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          {uniqueCategoriesArray.map((category, index) => (
-            <button>{category}</button>
-          ))}
         </div>
       </div>
       <br />
