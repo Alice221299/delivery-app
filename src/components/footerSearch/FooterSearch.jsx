@@ -9,8 +9,6 @@ const FooterSearch = ({ statu }) => {
         navigate(`${ruta}`);
     }
 
-
-
     return (
 
         <footer className='footerSearch'>

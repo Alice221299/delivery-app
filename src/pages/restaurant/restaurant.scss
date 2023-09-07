@@ -1,7 +1,7 @@
 @import "../../assets/styles/variables.scss";
 @import "../../assets/styles/reset.scss";
 .restaurant{
-  padding: 40px 30px;
+  padding: 40px 30px 60px 30px;
   background-color: #fefdf9;
   font-family: $font-roboto;
   display: flex;
@@ -150,9 +150,9 @@
     flex-wrap: wrap;
     // display: gridfel;
     // grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 55px;
+    gap: 36px;
     height: auto;
-    padding: 0 50px;
+    padding: 0;
     justify-content: space-between;
 
     &__food {
@@ -162,15 +162,16 @@
       background-color: #fff;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 15px;
       cursor: pointer;
-      width: 150px;
+      width: 120px;
 
     }
     &__media {
       // overflow: hidden;
       border-radius: 10px;
-      height: 100px;
+      height: 80px;
+      wi
       span{
         color: $grey;
       }
