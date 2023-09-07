@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import { useAuth } from "../../context/authContext";
 import location from "../../assets/Location.png";
 import arrow from "../../assets/Arrow.png";
 import hamburger from "../../assets/hamburger.png";
@@ -11,13 +10,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
-import Footer from "../footer/Footer";
-import MainButton from "../../components/mainButton/MainButton";
 import { useDispatch, useSelector } from "react-redux";
 import { fillRestaurantsFromCollection } from "../../redux/actions/restaurantsActions";
 import { FaStar } from "react-icons/fa";
 import FooterSearch from "../../components/footerSearch/FooterSearch";import { fillProductsFromCollection } from '../../redux/actions/productsActions';
-import Basket from "../../components/basket/Basket";
+
 
 
 const Home = () => {
@@ -163,7 +160,7 @@ const Home = () => {
           }): null}
         </div>
       </div>
-      {/* <FooterSearch statu={1} /> */}
+      <FooterSearch statu={1} />
     </div>
   );
 };

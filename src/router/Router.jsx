@@ -45,7 +45,6 @@ const Router = () => {
   return (
     <BrowserRouter>
         <Routes>
-                {/* <Route path="/restaurant" element={<Restaurant />}/> */}
             <Route>
                 <Route element={<PublicRouter isAuthenticate={isLogged}/>}>
                     <Route path='/' element={<Splash/>}/>

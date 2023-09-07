@@ -23,13 +23,6 @@
         cursor: pointer;
         align-content: flex-start;
         align-self: flex-start;
-        //   font-size: 24px;
-        //   font-weight: bolder;
-        //   margin-bottom: 40px;
-        // & img {
-        //   width: 100%;
-        //   height: 100%;
-        // }
       }
 
       &__logo {
@@ -49,11 +42,8 @@
     &__nav {
       padding: 20px 20px 0 20px;
       display: flex;
-      // justify-content: flex-start;
       align-items: center;
     }
-
-
     &__location {
       max-height: 300px;
       width: 40%;
@@ -140,16 +130,11 @@
         justify-content: space-between;
       }
     }
-    // gap: 20px;
-    // height: calc(100px + 1vw);
-    // max-height: 200px;
 
   }
   &__body {
     display: flex;
     flex-wrap: wrap;
-    // display: gridfel;
-    // grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 36px;
     height: auto;
     padding: 0;
@@ -168,7 +153,6 @@
 
     }
     &__media {
-      // overflow: hidden;
       border-radius: 10px;
       height: 80px;
       wi

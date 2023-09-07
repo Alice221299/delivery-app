@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import React from 'react';
 import { createAnUser } from "../../redux/authActions";
-// import { useAuth } from '../../context/authContext';
 import './createAccount.scss';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -10,28 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import back from '../../assets/back.png'
 
 const CreateAccount = () => {
-  // const navigate = useNavigate();
-  // const { signUp } = useAuth();
-  // const { register, handleSubmit, reset, formState: { errors } } = useForm();
-
-  // const onSubmit = async (data) => {
-  //   const { name, email, password,address, birthdate, photoURL } = data;
-
-  //   try {
-
-  //     if (password.length < 3) {
-  //       throw new Error('Password must be at least 3 characters long');
-  //     }
-  //     if (photoURL) {
-  //       const uploadedPhotoURL = await uploadFile(data.photoURL[0]);
-  //       data.photoURL = uploadedPhotoURL;
-  //     }
-      
-  //     // await signUp(name, email, password,address, birthdate, photoURL );
-  //     console.log('User registered successfully');
-  //     console.log(data)
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();

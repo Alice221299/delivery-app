@@ -7,8 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, loginWithEmailAndPassword } from "../../redux/authActions";
 import google from "../../assets/google.svg";
-// import { useAuth } from "../../context/authContext";
-import { async } from "@firebase/util";
 
 const Login = () => {
   const navigate = useNavigate();
