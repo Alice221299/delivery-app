@@ -39,6 +39,9 @@ currentOrder?.products?.map((product) => {
     if (location.pathname === '/order'){
       sendOrder()
     }
+    else if (location.pathname === '/accepted') {
+      navigate('/current')
+    }
   }
   return (
     <button onClick={click}>{text}</button>
