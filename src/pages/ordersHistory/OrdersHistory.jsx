@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './ordersHistory.scss'
 import HistoryOrder from '../../components/historyOrder/HistoryOrder';
 import FooterSearch from '../../components/footerSearch/FooterSearch';
+import { useDispatch, useSelector } from 'react-redux';
+import { fillOrdersFromCollection } from '../../redux/actions/orderActions';
 const OrdersHistory = () => {
+
+  const { orders } = useSelector(store => store.order);
+  const { userLogged } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fillOrdersFromCollection());
+    console.log("user", userLogged);
+  }, [dispatch]);
+
+  console.log('orders', orders);
   return (
     <div className='ordersAll'>
 

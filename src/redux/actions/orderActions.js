@@ -32,48 +32,48 @@ export const createAnOrderAction = (newOrder) => async (dispatch) => {
     }
 }
 
-const dispatch = useDispatch();
-const { userLogged } = useSelector(store => store.auth);
-const { currentOrder } = useSelector(store => store.order);
+// const dispatch = useDispatch();
+// const { userLogged } = useSelector(store => store.auth);
+// const { currentOrder } = useSelector(store => store.order);
 
-const initializeOrder = () => {
-    if (currentOrder) {
-        const addedProduct = currentOrder.products.push(product)
-        dispatch(setCurrentOrder(addedProduct))
-    } else {
-        const order = {
-            products: [...product, product.amount = amount],
-            address: userLogged.directions[0],
-            payment: userLogged.payment[0],
-            total: products.forEach((product) => total += product.price * product.amount) + 5
-        }
-        dispatch(setCurrentOrder(order))
-    }
-}
+// const initializeOrder = () => {
+//     if (currentOrder) {
+//         const addedProduct = currentOrder.products.push(product)
+//         dispatch(setCurrentOrder(addedProduct))
+//     } else {
+//         const order = {
+//             products: [...product, product.amount = amount],
+//             address: userLogged.directions[0],
+//             payment: userLogged.payment[0],
+//             total: products.forEach((product) => total += product.price * product.amount) + 5
+//         }
+//         dispatch(setCurrentOrder(order))
+//     }
+// }
 
-const productArray = []
-currentOrder.products.forEach((product) => {
-    const newProduct = {
-        amount: product.amount,
-        name: product.name,
-        price: product.price * product.amount
-    }
-    productArray.push(newProduct)
-})
+// const productArray = []
+// currentOrder.products.forEach((product) => {
+//     const newProduct = {
+//         amount: product.amount,
+//         name: product.name,
+//         price: product.price * product.amount
+//     }
+//     productArray.push(newProduct)
+// })
 
-const sendOrder = () => {
-    const newOrder = {
-        idRestaurant: currentOrder.products[0].restaurantId,
-        idUser: userLogged.id,
-        products: productArray,
-        state: 'confirmed'
-    }
-    dispatch(createAnOrderAction(newOrder))
-    dispatch(setCurrentOrder(null))
-    navigate('/accepted')
-}
+// const sendOrder = () => {
+//     const newOrder = {
+//         idRestaurant: currentOrder.products[0].restaurantId,
+//         idUser: userLogged.id,
+//         products: productArray,
+//         state: 'confirmed'
+//     }
+//     dispatch(createAnOrderAction(newOrder))
+//     dispatch(setCurrentOrder(null))
+//     navigate('/accepted')
+// }
 
-const changePayment = (method) => {
-    const newPayment = [...currentOrder, currentOrder.payment = method]
-    dispatch(setCurrentOrder(newPayment))
-}
+// const changePayment = (method) => {
+//     const newPayment = [...currentOrder, currentOrder.payment = method]
+//     dispatch(setCurrentOrder(newPayment))
+// }

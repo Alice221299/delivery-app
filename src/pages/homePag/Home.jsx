@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../../context/authContext";
+// import { useAuth } from "../../context/authContext";
 import location from "../../assets/Location.png";
 import arrow from "../../assets/Arrow.png";
 import hamburger from "../../assets/hamburger.png";
